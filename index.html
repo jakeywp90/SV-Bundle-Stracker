@@ -1100,6 +1100,9 @@
 <div class="item-tooltip" id="reset-tooltip" style="padding: 0.4rem 0.9rem;">
   <span style="font-family:'Silkscreen',monospace; font-size:1.1rem; font-weight:500; color:#2a1a08;">Reset Progress</span>
 </div>
+<div class="item-tooltip" id="chat-tooltip" style="padding: 0.3rem 0.7rem; text-align:center;">
+  <span style="font-family:'Silkscreen',monospace; font-size:0.95rem; font-weight:500; color:#2a1a08; white-space:normal; display:block; width:130px; line-height:1.6;">QUESTIONS &amp;<br>SUGGESTIONS</span>
+</div>
 
 <!-- Retro confirm modal -->
 <div id="reset-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
@@ -2077,5 +2080,179 @@ resetBtn.addEventListener('mouseleave', () => resetTooltip.classList.remove('vis
 render();
 
 </script>
+
+
+<!-- Retro feedback chat bubble -->
+<div id="chat-bubble" style="
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:900;
+  width:52px;height:52px;
+  background:#6b8a50;
+  border-top:3px solid rgba(255,255,255,0.55);
+  border-left:3px solid rgba(255,255,255,0.45);
+  border-right:3px solid rgba(0,0,0,0.4);
+  border-bottom:3px solid rgba(0,0,0,0.45);
+  box-shadow:3px 3px 0 rgba(0,0,0,0.3);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.1s;
+" onmouseenter="this.style.transform='scale(1.08)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="3" width="20" height="14" fill="#fdf5dc" opacity="0.95"/>
+    <polygon points="5,17 2,22 10,17" fill="#fdf5dc" opacity="0.95"/>
+    <rect x="5" y="7" width="14" height="2" fill="#6b8a50"/>
+    <rect x="5" y="11" width="9" height="2" fill="#6b8a50"/>
+  </svg>
+</div>
+
+<div id="chat-window" style="
+  display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:900;
+  width:340px;max-width:calc(100vw - 2rem);
+  background:#fdf5dc;
+  border-top:4px solid rgba(255,255,255,0.7);
+  border-left:4px solid rgba(255,255,255,0.6);
+  border-right:4px solid rgba(0,0,0,0.45);
+  border-bottom:4px solid rgba(0,0,0,0.5);
+  box-shadow:6px 6px 0 rgba(0,0,0,0.3);
+  flex-direction:column;
+  overflow-y:auto;
+  max-height:calc(100vh - 8rem);
+">
+  <!-- Header -->
+  <div style="background:#6b8a50;padding:0.6rem 0.9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid rgba(0,0,0,0.2);">
+    <span style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#fdf5dc;letter-spacing:0.04em;">QUESTIONS &amp; SUGGESTIONS</span>
+    <button id="chat-close" style="background:none;border:none;cursor:pointer;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#fdf5dc;opacity:0.8;padding:0;line-height:1;">✕</button>
+  </div>
+
+  <!-- Form states -->
+  <div id="chat-form-wrap" style="padding:1.2rem 1.2rem 1rem;">
+    <p style="font-family:'Silkscreen',monospace;font-size:0.72rem;color:#807267;line-height:1.8;margin:0 0 1rem;">HAVE A QUESTION OR SUGGESTION? SEND A PRIVATE MESSAGE TO THE DEVELOPER.</p>
+
+    <form id="chat-form">
+      <div style="margin-bottom:0.9rem;">
+        <label style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;display:block;margin-bottom:0.4rem;letter-spacing:0.03em;">QUESTIONS / SUGGESTIONS *</label>
+        <textarea name="entry.1443214227" rows="4" placeholder="TYPE HERE..." style="
+          width:100%;box-sizing:border-box;resize:vertical;
+          font-family:'Silkscreen',monospace;font-size:0.72rem;color:#2a1a08;
+          background:#fdf0cc;
+          border-top:2px solid rgba(0,0,0,0.3);
+          border-left:2px solid rgba(0,0,0,0.25);
+          border-right:2px solid rgba(255,255,255,0.6);
+          border-bottom:2px solid rgba(255,255,255,0.55);
+          padding:0.4rem 0.5rem;outline:none;
+        "></textarea>
+      </div>
+      <div style="margin-bottom:1.1rem;">
+        <label style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;display:block;margin-bottom:0.4rem;letter-spacing:0.03em;">EMAIL ADDRESS (OPTIONAL)</label>
+        <input type="email" name="entry.1743396539" placeholder="YOU@EXAMPLE.COM" style="
+          width:100%;box-sizing:border-box;
+          font-family:'Silkscreen',monospace;font-size:0.72rem;color:#2a1a08;
+          background:#fdf0cc;
+          border-top:2px solid rgba(0,0,0,0.3);
+          border-left:2px solid rgba(0,0,0,0.25);
+          border-right:2px solid rgba(255,255,255,0.6);
+          border-bottom:2px solid rgba(255,255,255,0.55);
+          padding:0.4rem 0.5rem;outline:none;
+        "/>
+      </div>
+      <button type="submit" id="chat-submit-btn" style="
+        font-family:'Silkscreen',monospace;font-size:0.8rem;
+        width:100%;padding:0.5rem;
+        background:#6b8a50;color:#fdf5dc;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.5);
+        border-left:3px solid rgba(255,255,255,0.4);
+        border-right:3px solid rgba(0,0,0,0.4);
+        border-bottom:3px solid rgba(0,0,0,0.45);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.25);
+        cursor:pointer;letter-spacing:0.04em;
+      ">SUBMIT</button>
+      <div id="chat-sent" style="display:none;margin-top:0.8rem;margin-bottom:0rem;text-align:center;">
+        <div style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#6b8a50;line-height:2;">YOUR MESSAGE HAS BEEN SENT.</div>
+        <div style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;line-height:2;margin-top:0.2rem;">THANK YOU FOR YOUR<br>QUESTIONS &amp; SUGGESTIONS!</div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+(function() {
+  const bubble   = document.getElementById('chat-bubble');
+  const win      = document.getElementById('chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const form     = document.getElementById('chat-form');
+  const thanks   = document.getElementById('chat-thanks');
+  const formWrap = document.getElementById('chat-form-wrap');
+  let isOpen = false;
+
+  function toggle() {
+    isOpen = !isOpen;
+    win.style.display = isOpen ? 'flex' : 'none';
+    bubble.style.background = isOpen ? '#807267' : '#6b8a50';
+  }
+
+  bubble.addEventListener('click', toggle);
+  closeBtn.addEventListener('click', () => { if (isOpen) toggle(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen) toggle();
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (isOpen && !win.contains(e.target) && !bubble.contains(e.target)) toggle();
+  });
+
+  const submitBtn = document.getElementById('chat-submit-btn');
+  submitBtn.addEventListener('mousedown', () => {
+    submitBtn.style.transform = 'translateY(2px)';
+    submitBtn.style.boxShadow = 'none';
+    submitBtn.style.borderTop = '3px solid rgba(0,0,0,0.3)';
+    submitBtn.style.borderBottom = '3px solid rgba(255,255,255,0.4)';
+  });
+  ['mouseup','mouseleave'].forEach(ev => submitBtn.addEventListener(ev, () => {
+    submitBtn.style.transform = '';
+    submitBtn.style.boxShadow = '2px 2px 0 rgba(0,0,0,0.25)';
+    submitBtn.style.borderTop = '3px solid rgba(255,255,255,0.5)';
+    submitBtn.style.borderBottom = '3px solid rgba(0,0,0,0.45)';
+  }));
+
+  const chatTooltip = document.getElementById('chat-tooltip');
+  bubble.addEventListener('mouseenter', () => chatTooltip.classList.add('visible'));
+  bubble.addEventListener('mousemove', e => {
+    const tw = chatTooltip.offsetWidth;
+    const th = chatTooltip.offsetHeight;
+    chatTooltip.style.left = (e.clientX + tw > window.innerWidth ? e.clientX - tw - 12 : e.clientX + 12) + 'px';
+    chatTooltip.style.top  = (e.clientY - th - 12) + 'px';
+  });
+  bubble.addEventListener('mouseleave', () => chatTooltip.classList.remove('visible'));
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const textarea = form.querySelector('textarea');
+    const emailInput = form.querySelector('input[type="email"]');
+    const msg = textarea.value.trim();
+    if (!msg) return;
+
+    const params = new URLSearchParams();
+    params.append('entry.1443214227', msg);
+    if (emailInput.value.trim()) params.append('entry.1743396539', emailInput.value.trim());
+
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSeOubUGcju9HrWwhQsRgKE_Etl862nMGtTLrnj549j_iiN03Q/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    }).catch(() => {});
+
+    const sent = document.getElementById('chat-sent');
+    sent.style.display = 'block';
+    form.reset();
+    setTimeout(() => { sent.style.display = 'none'; }, 10000);
+  });
+})();
+</script>
+
 </body>
 </html>
