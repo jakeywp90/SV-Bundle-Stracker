@@ -293,16 +293,25 @@
     padding: 0.5rem 1.3rem 0.3rem;
   }
 
+  .search-result-room-reward {
+    padding: 0 1.3rem 0.5rem;
+    border-bottom: 2px solid rgba(0,0,0,0.12);
+    margin-bottom: 0.4rem;
+  }
+
   .search-result-bundle {
     font-family: 'Silkscreen', monospace;
     font-size: 1.3rem;
     font-weight: 400;
-    padding: 0.1rem 1.3rem 0.3rem;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0.1rem 1.3rem 0.3rem 3.5rem;
   }
+  .search-result-bundle.complete { text-decoration: line-through; opacity: 0.5; }
+  .search-result-group.complete .search-result-room { text-decoration: line-through; opacity: 0.5; }
 
   .search-result-items {
-    padding: 0.5rem 1.3rem 0.9rem 1.3rem;
+    padding: 0.5rem 1.3rem 0.9rem 3.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-top: 0.1rem;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -386,9 +395,14 @@
     transition: opacity 0.3s;
   }
   .room-card.complete .complete-badge { opacity: 1; }
+  .room-card.complete .room-name { text-decoration: line-through; opacity: 0.5; }
+  .room-card.complete .room-reward { text-decoration: line-through; opacity: 0.4; }
 
   .bundle-reward-row {
     padding: 0 1rem 0.45rem 1rem;
+  }
+  .search-result-group .bundle-reward-row {
+    padding: 0 1rem 0.45rem 3.5rem;
   }
 
   .bundle-reward {
@@ -438,12 +452,17 @@
     flex: 1;
   }
 
+  .bundle.complete .bundle-name { text-decoration: line-through; opacity: 0.5; }
+  .bundle.complete .bundle-reward { text-decoration: line-through; opacity: 0.4; }
+  .bundle-reward.complete { text-decoration: line-through; opacity: 0.4; }
+  .room-reward.complete { text-decoration: line-through; opacity: 0.4; }
+
   .bundle-items {
     padding: 0 1rem 0.4rem 2.4rem;
     display: grid;
     gap: 0.05rem;
   }
-  .bundle-items.two-col { grid-template-columns: 1fr 1fr; }
+  .bundle-items.two-col { grid-template-columns: 1fr 1fr; grid-auto-flow: column; }
   .bundle-items.one-col  { grid-template-columns: 1fr; }
 
   .item-row {
@@ -502,6 +521,18 @@
   .item-row.checked .item-name {
     opacity: 0.4;
     text-decoration: line-through;
+  }
+
+  .item-row.surplus {
+    cursor: default;
+    pointer-events: none;
+  }
+  .item-row.surplus .item-name {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+  .item-row.surplus .item-check {
+    opacity: 0.6;
   }
 
   .item-note {
@@ -598,6 +629,13 @@
   .room-bulletin .item-name { color: var(--bulletin-text); }
   .room-vault    .item-name { color: var(--vault-text); }
 
+  .room-craft    .item-row.surplus .item-name { color: var(--craft-text); }
+  .room-pantry   .item-row.surplus .item-name { color: var(--pantry-text); }
+  .room-fish     .item-row.surplus .item-name { color: var(--fish-text); }
+  .room-boiler   .item-row.surplus .item-name { color: var(--boiler-text); }
+  .room-bulletin .item-row.surplus .item-name { color: var(--bulletin-text); }
+  .room-vault    .item-row.surplus .item-name { color: var(--vault-text); }
+
   .room-craft    .item-check { color: var(--craft-accent); }
   .room-pantry   .item-check { color: var(--pantry-accent); }
   .room-fish     .item-check { color: var(--fish-accent); }
@@ -640,6 +678,13 @@
   .search-result-group.room-boiler   .item-name { color: var(--boiler-text); }
   .search-result-group.room-bulletin .item-name { color: var(--bulletin-text); }
   .search-result-group.room-vault    .item-name { color: var(--vault-text); }
+
+  .search-result-group.room-craft    .item-row.surplus .item-name { color: var(--craft-text); }
+  .search-result-group.room-pantry   .item-row.surplus .item-name { color: var(--pantry-text); }
+  .search-result-group.room-fish     .item-row.surplus .item-name { color: var(--fish-text); }
+  .search-result-group.room-boiler   .item-row.surplus .item-name { color: var(--boiler-text); }
+  .search-result-group.room-bulletin .item-row.surplus .item-name { color: var(--bulletin-text); }
+  .search-result-group.room-vault    .item-row.surplus .item-name { color: var(--vault-text); }
 
   footer {
     text-align: center;
@@ -1056,6 +1101,49 @@
   <span style="font-family:'Silkscreen',monospace; font-size:1.1rem; font-weight:500; color:#2a1a08;">Reset Progress</span>
 </div>
 
+<!-- Retro confirm modal -->
+<div id="reset-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+  <div id="reset-modal-box" style="
+    background:#fdf5dc;
+    border-top:4px solid rgba(255,255,255,0.7);
+    border-left:4px solid rgba(255,255,255,0.6);
+    border-right:4px solid rgba(0,0,0,0.5);
+    border-bottom:4px solid rgba(0,0,0,0.55);
+    box-shadow:6px 6px 0 rgba(0,0,0,0.35);
+    padding:1.5rem 2.5rem 1.5rem;
+    max-width:360px;
+    width:90%;
+    text-align:center;
+  ">
+    <div style="font-family:'Silkscreen',monospace;font-size:1.1rem;color:#807267;margin-bottom:1.5rem;line-height:1.8;text-transform:uppercase;font-style:normal;">Reset all progress?<br>This cannot be undone.</div>
+    <div style="display:flex;gap:1.5rem;justify-content:center;">
+      <button id="reset-confirm-yes" style="
+        font-family:'Silkscreen',monospace;font-size:1rem;text-transform:uppercase;
+        padding:0.45rem 1.2rem;
+        background:#c84040;color:#fff;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.5);
+        border-left:3px solid rgba(255,255,255,0.4);
+        border-right:3px solid rgba(0,0,0,0.4);
+        border-bottom:3px solid rgba(0,0,0,0.45);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.3);
+        cursor:pointer;
+      ">YES</button>
+      <button id="reset-confirm-no" style="
+        font-family:'Silkscreen',monospace;font-size:1rem;text-transform:uppercase;
+        padding:0.45rem 1.2rem;
+        background:#e8d8b8;color:#807267;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.55);
+        border-left:3px solid rgba(255,255,255,0.45);
+        border-right:3px solid rgba(0,0,0,0.35);
+        border-bottom:3px solid rgba(0,0,0,0.4);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.25);
+        cursor:pointer;
+      ">NO</button>
+    </div>
+  </div>
+</div>
 <script>
 const DATA = [
   {
@@ -1357,11 +1445,13 @@ function getBundleProgress(room, bundleIdx) {
 
 function getRoomProgress(room) {
   let done = 0, total = 0;
+  let allBundlesComplete = true;
   room.bundles.forEach((_, bi) => {
     const p = getBundleProgress(room, bi);
     done += p.done; total += p.total;
+    if (!p.complete) allBundlesComplete = false;
   });
-  return { done, total, complete: done === total };
+  return { done, total, complete: allBundlesComplete };
 }
 
 function getAllProgress() {
@@ -1409,11 +1499,15 @@ function render() {
       // Skip bundle if no items match the season filter
       if (seasonFilter && !bundle.items.some(item => itemMatchesSeason(item.name))) return '';
 
+      const bundleRequired = bundle.required || bundle.items.length;
+      const bundleDoneCount = bundle.items.filter((_, i) => isChecked(room.id, bi, i)).length;
+      const bundleSatisfied = bundleDoneCount >= bundleRequired;
       const itemsHtml = bundle.items.map((item, ii) => {
         const checked = isChecked(room.id, bi, ii);
         if (filterUncollected && checked) return '';
         if (!itemMatchesSeason(item.name)) return '';
-        return `<div class="item-row${checked ? ' checked' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
+        const surplus = !checked && bundleSatisfied;
+        return `<div class="item-row${checked ? ' checked' : surplus ? ' surplus' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
           <div class="item-check">${checked ? 'x' : ''}</div>
           <span class="item-name">${item.name}</span>
           ${item.note ? `<span class="item-note">${item.note}</span>` : ''}
@@ -1423,14 +1517,17 @@ function render() {
       // Skip bundle if all visible items have been filtered out
       if (!itemsHtml.trim()) return '';
 
-      const colClass = bundle.items.length > 4 ? 'two-col' : 'one-col';
+      const visibleCount = itemsHtml.split('item-row').length - 1;
+      const isTwoCol = bundle.items.length > 4;
+      const colClass = isTwoCol ? 'two-col' : 'one-col';
+      const rowStyle = isTwoCol ? ` style="grid-template-rows: repeat(${Math.ceil(visibleCount / 2)}, auto);"` : '';
       return `<div class="bundle${bp.complete ? ' complete' : ''}">
         <div class="bundle-header">
           <span class="bundle-name">${bundle.name}</span>
           <span class="bundle-progress">${bp.done}/${bp.total}</span>
         </div>
         ${bundle.reward ? `<div class="bundle-reward-row"><span class="bundle-reward">🎁 ${bundle.reward}</span></div>` : ''}
-        <div class="bundle-items ${colClass}">${itemsHtml}</div>
+        <div class="bundle-items ${colClass}"${rowStyle}>${itemsHtml}</div>
       </div>`;
     }).join('');
 
@@ -1453,7 +1550,7 @@ function render() {
   });
 
   // Events
-  grid.querySelectorAll('.item-row').forEach(row => {
+  grid.querySelectorAll('.item-row:not(.surplus)').forEach(row => {
     row.addEventListener('click', () => {
       toggle(row.dataset.room, parseInt(row.dataset.bundle), parseInt(row.dataset.item));
     });
@@ -1570,6 +1667,14 @@ const ROOM_COLORS = {
   '25,000g Bundle':          { bg: 'var(--vault-header)', color: 'var(--vault-title)' },
 };
 
+let autocompleteIndex = 0;
+
+function setAutocompleteActive(idx) {
+  const items = autocompleteEl.querySelectorAll('.autocomplete-item');
+  items.forEach((el, i) => el.classList.toggle('active', i === idx));
+  autocompleteIndex = idx;
+}
+
 function showAutocomplete(query) {
   if (!query || query.length < 2) { autocompleteEl.style.display = 'none'; return; }
   const all = getAllItemNames();
@@ -1583,7 +1688,10 @@ function showAutocomplete(query) {
     return `<div class="autocomplete-item" data-value="${m}" ${style}>${highlightMatch(m, query)}</div>`;
   }).join('');
   autocompleteEl.style.display = 'block';
-  autocompleteEl.querySelectorAll('.autocomplete-item').forEach(el => {
+  // Always highlight first item by default
+  setAutocompleteActive(0);
+  autocompleteEl.querySelectorAll('.autocomplete-item').forEach((el, i) => {
+    el.addEventListener('mouseover', () => setAutocompleteActive(i));
     el.addEventListener('mousedown', e => {
       e.preventDefault();
       searchInput.value = el.dataset.value;
@@ -1652,9 +1760,13 @@ function doSearch(query) {
         return true;
       });
       if (!filteredItems.length) return '';
+      const srBundleRequired = bundle.required || bundle.items.length;
+      const srBundleDoneCount = bundle.items.filter((_, i) => isChecked(room.id, bi, i)).length;
+      const srBundleSatisfied = srBundleDoneCount >= srBundleRequired;
       const itemsHtml = filteredItems.map(({ item, ii }) => {
         const checked = isChecked(room.id, bi, ii);
-        return `<div class="item-row${checked ? ' checked' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
+        const surplus = !checked && srBundleSatisfied;
+        return `<div class="item-row${checked ? ' checked' : surplus ? ' surplus' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
           <div class="item-check">${checked ? 'x' : ''}</div>
           <span class="item-name">${item.name}</span>
           ${item.note ? `<span class="item-note">${item.note}</span>` : ''}
@@ -1662,20 +1774,23 @@ function doSearch(query) {
       }).join('');
       if (!itemsHtml.trim()) return '';
 
-      return `<div class="search-result-bundle">${bundle.name}</div>
+      return `<div class="search-result-bundle${bp.complete ? ' complete' : ''}">${bundle.name}<span class="bundle-progress" style="margin-left:0.6rem;">${bp.done}/${bp.total}</span></div>
+        ${bundle.reward ? `<div class="bundle-reward-row"><span class="bundle-reward${bp.complete ? ' complete' : ''}">🎁 ${bundle.reward}</span></div>` : ''}
         <div class="search-result-items">${itemsHtml}</div>`;
     }).join('');
 
     const bundlesContent = bundlesHtml;
     if (!bundlesContent.trim()) return '';
-    return `<div class="search-result-group ${room.cssClass}">
-      <div class="search-result-room">${room.icon} ${room.name}</div>
+    const srp = getRoomProgress(room);
+    return `<div class="search-result-group ${room.cssClass}${srp.complete ? ' complete' : ''}">
+      <div class="search-result-room" style="display:flex;align-items:center;gap:0.7rem;">${room.name}<span class="room-count" style="font-size:1.1rem;padding:0.15rem 0.6rem;">${srp.done}/${srp.total}</span></div>
+      <div class="search-result-room-reward room-reward${srp.complete ? ' complete' : ''}">🎁 ${room.reward}</div>
       ${bundlesContent}
     </div>`;
   }).filter(Boolean).join('');
 
   // Attach click events to search result items
-  searchResults.querySelectorAll('.item-row').forEach(row => {
+  searchResults.querySelectorAll('.item-row:not(.surplus)').forEach(row => {
     row.addEventListener('click', () => {
       toggle(row.dataset.room, parseInt(row.dataset.bundle), parseInt(row.dataset.item));
       doSearch(searchInput.value); // re-render search with updated state
@@ -1696,13 +1811,26 @@ document.addEventListener('keydown', e => {
 });
 
 searchInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const first = autocompleteEl.querySelector('.autocomplete-item');
-    if (first && autocompleteEl.style.display !== 'none') {
+  const items = autocompleteEl.querySelectorAll('.autocomplete-item');
+  const isOpen = autocompleteEl.style.display !== 'none' && items.length > 0;
+
+  if (e.key === 'ArrowDown') {
+    if (!isOpen) return;
+    e.preventDefault();
+    setAutocompleteActive(Math.min(autocompleteIndex + 1, items.length - 1));
+  } else if (e.key === 'ArrowUp') {
+    if (!isOpen) return;
+    e.preventDefault();
+    setAutocompleteActive(Math.max(autocompleteIndex - 1, 0));
+  } else if (e.key === 'Enter') {
+    if (isOpen) {
       e.preventDefault();
-      searchInput.value = first.dataset.value;
-      autocompleteEl.style.display = 'none';
-      doSearch(first.dataset.value);
+      const active = items[autocompleteIndex] || items[0];
+      if (active) {
+        searchInput.value = active.dataset.value;
+        autocompleteEl.style.display = 'none';
+        doSearch(active.dataset.value);
+      }
     }
   }
 });
@@ -1728,13 +1856,28 @@ searchClear.addEventListener('click', () => {
   doSearch('');
 });
 
+const resetModal = document.getElementById('reset-modal');
+const resetConfirmYes = document.getElementById('reset-confirm-yes');
+const resetConfirmNo = document.getElementById('reset-confirm-no');
+
 document.getElementById('reset-btn').addEventListener('click', () => {
-  if (confirm('Reset all progress? This cannot be undone.')) {
-    state = {};
-    save();
-    render();
-    if (searchInput.value) doSearch(searchInput.value);
-  }
+  resetModal.style.display = 'flex';
+});
+
+resetConfirmYes.addEventListener('click', () => {
+  resetModal.style.display = 'none';
+  state = {};
+  save();
+  render();
+  if (searchInput.value) doSearch(searchInput.value);
+});
+
+resetConfirmNo.addEventListener('click', () => {
+  resetModal.style.display = 'none';
+});
+
+resetModal.addEventListener('mousedown', e => {
+  if (e.target === resetModal) resetModal.style.display = 'none';
 });
 
 // ── Tooltips ─────────────────────────────────────────────
