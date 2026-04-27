@@ -1113,9 +1113,6 @@
 <div class="item-tooltip" id="reset-tooltip" style="padding: 0.4rem 0.9rem;">
   <span style="font-family:'Silkscreen',monospace; font-size:1.1rem; font-weight:500; color:#2a1a08;">Reset Progress</span>
 </div>
-<div class="item-tooltip" id="chat-tooltip" style="padding: 0.3rem 0.7rem; text-align:center;">
-  <span style="font-family:'Silkscreen',monospace; font-size:0.95rem; font-weight:500; color:#2a1a08; white-space:normal; display:block; width:130px; line-height:1.6;">QUESTIONS &amp;<br>SUGGESTIONS</span>
-</div>
 
 <!-- Retro confirm modal -->
 <div id="reset-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
@@ -2246,15 +2243,6 @@ render();
     submitBtn.style.borderBottom = '3px solid rgba(0,0,0,0.45)';
   }));
 
-  const chatTooltip = document.getElementById('chat-tooltip');
-  bubble.addEventListener('mouseenter', () => chatTooltip.classList.add('visible'));
-  bubble.addEventListener('mousemove', e => {
-    const tw = chatTooltip.offsetWidth;
-    const th = chatTooltip.offsetHeight;
-    chatTooltip.style.left = (e.clientX + tw > window.innerWidth ? e.clientX - tw - 12 : e.clientX + 12) + 'px';
-    chatTooltip.style.top  = (e.clientY - th - 12) + 'px';
-  });
-  bubble.addEventListener('mouseleave', () => chatTooltip.classList.remove('visible'));
 
   // Radio: Question / Suggestion — toggle email required
   const typeQuestion   = document.getElementById('type-question');
