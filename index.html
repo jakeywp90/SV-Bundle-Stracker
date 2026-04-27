@@ -2086,7 +2086,7 @@ render();
 <div id="chat-bubble" style="
   position:fixed;bottom:1.5rem;right:1.5rem;z-index:900;
   width:52px;height:52px;
-  background:#6b8a50;
+  background:#807267;
   border-top:3px solid rgba(255,255,255,0.55);
   border-left:3px solid rgba(255,255,255,0.45);
   border-right:3px solid rgba(0,0,0,0.4);
@@ -2099,14 +2099,14 @@ render();
   <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <rect x="2" y="3" width="20" height="14" fill="#fdf5dc" opacity="0.95"/>
     <polygon points="5,17 2,22 10,17" fill="#fdf5dc" opacity="0.95"/>
-    <rect x="5" y="7" width="14" height="2" fill="#6b8a50"/>
-    <rect x="5" y="11" width="9" height="2" fill="#6b8a50"/>
+    <rect x="5" y="7" width="14" height="2" fill="#807267"/>
+    <rect x="5" y="11" width="9" height="2" fill="#807267"/>
   </svg>
 </div>
 
 <div id="chat-window" style="
-  display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:900;
-  width:340px;max-width:calc(100vw - 2rem);
+  display:none;position:fixed;bottom:6rem;right:1.5rem;z-index:900;
+  width:420px;max-width:calc(100vw - 2rem);
   background:#fdf5dc;
   border-top:4px solid rgba(255,255,255,0.7);
   border-left:4px solid rgba(255,255,255,0.6);
@@ -2118,46 +2118,61 @@ render();
   max-height:calc(100vh - 8rem);
 ">
   <!-- Header -->
-  <div style="background:#6b8a50;padding:0.6rem 0.9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid rgba(0,0,0,0.2);">
-    <span style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#fdf5dc;letter-spacing:0.04em;">QUESTIONS &amp; SUGGESTIONS</span>
-    <button id="chat-close" style="background:none;border:none;cursor:pointer;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#fdf5dc;opacity:0.8;padding:0;line-height:1;">✕</button>
+  <div style="background:#807267;padding:0.8rem 1.1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid rgba(0,0,0,0.2);">
+    <span style="font-family:'Silkscreen',monospace;font-size:1rem;color:#fdf5dc;letter-spacing:0.04em;">QUESTIONS &amp; SUGGESTIONS</span>
+    <button id="chat-close" style="background:none;border:none;cursor:pointer;padding:0;line-height:1;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:1rem;font-weight:700;color:#fdf5dc;opacity:0.85;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.85'">x</button>
   </div>
 
   <!-- Form states -->
-  <div id="chat-form-wrap" style="padding:1.2rem 1.2rem 1rem;">
-    <p style="font-family:'Silkscreen',monospace;font-size:0.72rem;color:#807267;line-height:1.8;margin:0 0 1rem;">HAVE A QUESTION OR SUGGESTION? SEND A MESSAGE TO THE DEVELOPER.</p>
+  <div id="chat-form-wrap" style="padding:1.5rem 1.5rem 1.2rem;">
+    <p style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;line-height:1.8;margin:0 0 1.2rem;">HAVE A QUESTION OR SUGGESTION? SEND A MESSAGE TO THE DEVELOPER.</p>
 
     <form id="chat-form">
-      <div style="margin-bottom:0.9rem;">
-        <label style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;display:block;margin-bottom:0.4rem;letter-spacing:0.03em;">QUESTIONS / SUGGESTIONS *</label>
-        <textarea name="entry.1443214227" rows="4" placeholder="TYPE HERE..." style="
-          width:100%;box-sizing:border-box;resize:vertical;
-          font-family:'Silkscreen',monospace;font-size:0.72rem;color:#2a1a08;
-          background:#fdf0cc;
-          border-top:2px solid rgba(0,0,0,0.3);
-          border-left:2px solid rgba(0,0,0,0.25);
-          border-right:2px solid rgba(255,255,255,0.6);
-          border-bottom:2px solid rgba(255,255,255,0.55);
-          padding:0.4rem 0.5rem;outline:none;
-        "></textarea>
+      <!-- Step 1: Question or Suggestion -->
+      <div style="margin-bottom:1.1rem;">
+        <label style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.6rem;letter-spacing:0.03em;">I HAVE A... *</label>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <label id="type-question-label" style="display:flex;align-items:center;gap:0.5rem;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;cursor:pointer;">
+            <input type="radio" name="entry.157072306" value="QUESTION" id="type-question" style="accent-color:#6b8a50;cursor:pointer;width:16px;height:16px;">
+            QUESTION
+          </label>
+          <label id="type-suggestion-label" style="display:flex;align-items:center;gap:0.5rem;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;cursor:pointer;">
+            <input type="radio" name="entry.157072306" value="SUGGESTION" id="type-suggestion" style="accent-color:#6b8a50;cursor:pointer;width:16px;height:16px;">
+            SUGGESTION
+          </label>
+        </div>
       </div>
       <div style="margin-bottom:1.1rem;">
-        <label style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;display:block;margin-bottom:0.4rem;letter-spacing:0.03em;">EMAIL ADDRESS (OPTIONAL)</label>
-        <input type="email" name="entry.1743396539" placeholder="YOU@EXAMPLE.COM" style="
-          width:100%;box-sizing:border-box;
-          font-family:'Silkscreen',monospace;font-size:0.72rem;color:#2a1a08;
+        <label style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.5rem;letter-spacing:0.03em;">MESSAGE *</label>
+        <textarea name="entry.1443214227" rows="6" placeholder="TYPE HERE..." style="
+          width:100%;box-sizing:border-box;resize:vertical;
+          font-family:'Silkscreen',monospace;font-size:0.85rem;color:#2a1a08;
           background:#fdf0cc;
           border-top:2px solid rgba(0,0,0,0.3);
           border-left:2px solid rgba(0,0,0,0.25);
           border-right:2px solid rgba(255,255,255,0.6);
           border-bottom:2px solid rgba(255,255,255,0.55);
-          padding:0.4rem 0.5rem;outline:none;
+          padding:0.55rem 0.65rem;outline:none;
+        "></textarea>
+      </div>
+      <div style="margin-bottom:1.3rem;">
+        <label id="email-label" style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.5rem;letter-spacing:0.03em;">EMAIL ADDRESS (OPTIONAL)</label>
+        <input type="text" id="chat-email" name="entry.1743396539" placeholder="YOU@EXAMPLE.COM" autocomplete="email" inputmode="email" style="
+          width:100%;box-sizing:border-box;
+          font-family:'Silkscreen',monospace;font-size:0.85rem;color:#2a1a08;
+          background:#fdf0cc;
+          border-top:2px solid rgba(0,0,0,0.3);
+          border-left:2px solid rgba(0,0,0,0.25);
+          border-right:2px solid rgba(255,255,255,0.6);
+          border-bottom:2px solid rgba(255,255,255,0.55);
+          padding:0.55rem 0.65rem;outline:none;
         "/>
+        <div id="email-error" style="display:none;font-family:'Silkscreen',monospace;font-size:0.75rem;color:#b84010;margin-top:0.35rem;letter-spacing:0.02em;">PLEASE ENTER A VALID EMAIL ADDRESS.</div>
       </div>
       <button type="submit" id="chat-submit-btn" style="
-        font-family:'Silkscreen',monospace;font-size:0.8rem;
-        width:100%;padding:0.5rem;
-        background:#6b8a50;color:#fdf5dc;
+        font-family:'Silkscreen',monospace;font-size:0.95rem;
+        width:100%;padding:0.65rem;
+        background:#807267;color:#fdf5dc;
         border:none;
         border-top:3px solid rgba(255,255,255,0.5);
         border-left:3px solid rgba(255,255,255,0.4);
@@ -2166,14 +2181,16 @@ render();
         box-shadow:2px 2px 0 rgba(0,0,0,0.25);
         cursor:pointer;letter-spacing:0.04em;
       ">SUBMIT</button>
-      <div id="chat-sent" style="display:none;margin-top:0.8rem;margin-bottom:0rem;text-align:center;">
-        <div style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#6b8a50;line-height:2;">YOUR MESSAGE HAS BEEN SENT.</div>
-        <div style="font-family:'Silkscreen',monospace;font-size:0.68rem;color:#807267;line-height:2;margin-top:0.2rem;">THANK YOU FOR YOUR<br>QUESTIONS &amp; SUGGESTIONS!</div>
+      <div id="chat-sent" style="display:none;margin-top:1rem;margin-bottom:0rem;text-align:center;">
+        <div style="font-family:'Silkscreen',monospace;font-size:0.82rem;color:#6b8a50;line-height:2;">YOUR MESSAGE HAS BEEN SENT.</div>
+        <div style="font-family:'Silkscreen',monospace;font-size:0.82rem;color:#807267;line-height:2;margin-top:0.2rem;">THANK YOU FOR YOUR<br>QUESTIONS &amp; SUGGESTIONS!</div>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Hidden iframe for Google Form submission -->
+<iframe name="hidden-gform" style="display:none;" aria-hidden="true"></iframe>
 
 <script>
 (function() {
@@ -2188,7 +2205,7 @@ render();
   function toggle() {
     isOpen = !isOpen;
     win.style.display = isOpen ? 'flex' : 'none';
-    bubble.style.background = isOpen ? '#807267' : '#6b8a50';
+    bubble.style.background = isOpen ? '#6b5c50' : '#807267';
   }
 
   bubble.addEventListener('click', toggle);
@@ -2226,30 +2243,93 @@ render();
   });
   bubble.addEventListener('mouseleave', () => chatTooltip.classList.remove('visible'));
 
+  // Radio: Question / Suggestion — toggle email required
+  const typeQuestion   = document.getElementById('type-question');
+  const typeSuggestion = document.getElementById('type-suggestion');
+  const emailInput     = document.getElementById('chat-email');
+  const emailLabel     = document.getElementById('email-label');
+  const qLabel         = document.getElementById('type-question-label');
+  const sLabel         = document.getElementById('type-suggestion-label');
+
+  function updateEmailRequirement() {
+    const isQuestion = typeQuestion.checked;
+    emailInput.required = isQuestion;
+    emailLabel.textContent = isQuestion ? 'EMAIL ADDRESS (REQUIRED) *' : 'EMAIL ADDRESS (OPTIONAL)';
+  }
+
+  typeQuestion.addEventListener('change', updateEmailRequirement);
+  typeSuggestion.addEventListener('change', updateEmailRequirement);
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     e.stopPropagation();
 
     const textarea = form.querySelector('textarea');
-    const emailInput = form.querySelector('input[type="email"]');
     const msg = textarea.value.trim();
+    const selectedType = form.querySelector('input[name="entry.157072306"]:checked');
+    const emailError = document.getElementById('email-error');
+    const emailVal = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    emailError.style.display = 'none';
+
+    if (!selectedType) return;
     if (!msg) return;
 
-    const params = new URLSearchParams();
-    params.append('entry.1443214227', msg);
-    if (emailInput.value.trim()) params.append('entry.1743396539', emailInput.value.trim());
+    // Email required for Question, validate format if provided for either
+    if (typeQuestion.checked && !emailVal) {
+      emailInput.focus();
+      emailError.textContent = 'EMAIL ADDRESS IS REQUIRED FOR QUESTIONS.';
+      emailError.style.display = 'block';
+      return;
+    }
+    if (emailVal && !emailRegex.test(emailVal)) {
+      emailInput.focus();
+      emailError.textContent = 'PLEASE ENTER A VALID EMAIL ADDRESS.';
+      emailError.style.display = 'block';
+      return;
+    }
 
-    fetch('https://docs.google.com/forms/d/e/1FAIpQLSeOubUGcju9HrWwhQsRgKE_Etl862nMGtTLrnj549j_iiN03Q/formResponse', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString()
-    }).catch(() => {});
+    // Build a temporary form targeting the hidden iframe (bypasses CORS block)
+    const gform = document.createElement('form');
+    gform.method = 'POST';
+    gform.action = 'https://docs.google.com/forms/d/e/1FAIpQLSeOubUGcju9HrWwhQsRgKE_Etl862nMGtTLrnj549j_iiN03Q/formResponse';
+    gform.target = 'hidden-gform';
+    gform.style.display = 'none';
+
+    function addField(name, value) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      gform.appendChild(input);
+    }
+
+    addField('entry.157072306', selectedType.value);
+    if (selectedType.value === 'QUESTION') {
+      addField('entry.1443214227', msg);
+      if (emailVal) addField('entry.663547975', emailVal);
+      addField('pageHistory', '0,1');
+    } else {
+      addField('entry.1227616264', msg);
+      if (emailVal) addField('entry.1743396539', emailVal);
+      addField('pageHistory', '0,2');
+    }
+    addField('fbzx', '0');
+
+    document.body.appendChild(gform);
+    gform.submit();
+    setTimeout(() => { if (document.body.contains(gform)) document.body.removeChild(gform); }, 3000);
 
     const sent = document.getElementById('chat-sent');
-    sent.style.display = 'block';
-    form.reset();
-    setTimeout(() => { sent.style.display = 'none'; }, 10000);
+    setTimeout(() => {
+      form.reset();
+      emailError.style.display = 'none';
+      emailInput.required = false;
+      emailLabel.textContent = 'EMAIL ADDRESS (OPTIONAL)';
+      sent.style.display = 'block';
+      setTimeout(() => { sent.style.display = 'none'; }, 10000);
+    }, 500);
   });
 })();
 </script>
