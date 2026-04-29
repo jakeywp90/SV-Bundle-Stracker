@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stardew Valley Community Center Bundle Checklist | Fan-made</title>
+  <meta name="description" content="An interactive Stardew Valley Community Center restoration bundle checklist. Check off items, filter by season, search bundles and rooms, and track your progress toward restoring the Community Center. Your progress is automatically saved in your browser so you can pick up right where you left off.">
+  <meta name="keywords" content="Stardew Valley, Community Center, bundle tracker, checklist, bundles, items, spring, summer, fall, winter, fishing, crafts, pantry, boiler room, vault, bulletin board">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://stardewtracker.com/">
+
+  <!-- Favicons: ICO for browser tabs, PNG for Google Search -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stardewtracker.com/">
+  <meta property="og:title" content="Stardew Valley — Community Center Tracker">
+  <meta property="og:description" content="An interactive bundle checklist to help you restore the Community Center in Stardew Valley. Filter by season, search items, and track your progress.">
+  <meta property="og:image" content="https://stardewtracker.com/favicon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="96">
+  <meta property="og:image:height" content="96">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #3d2a14;
+    --parchment: #4a3520;
+    --warm-tan: #5c3d18;
+    --gold: #c8922a;
+    --gold-light: #e5b04a;
+    --green-dark: #2a6e18;
+    --green-mid: #3a9830;
+    --green-light: #58c040;
+    --bg: #e8f0d8;
+    --card-bg: #f0f7e6;
+    --card-border: rgba(80,120,40,0.25);
+
+    /* Crafts Room — spring green */
+    --craft-bg:        #f0f7e6;
+    --craft-header:    #d4edb8;
+    --craft-border:    #a0cc70;
+    --craft-title:     #2d6e1a;
+    --craft-sub:       #4a9e28;
+    --craft-bundle-bg: #c8e8a0;
+    --craft-accent:    #4a9e28;
+    --craft-text:      #1a4a0e;
+    --craft-count-bg:  #b8dc8a;
+
+    /* Pantry — harvest amber */
+    --pantry-bg:        #fdf3e0;
+    --pantry-header:    #fae2b0;
+    --pantry-border:    #e8c070;
+    --pantry-title:     #7a3d08;
+    --pantry-sub:       #b86010;
+    --pantry-bundle-bg: #fae2b0;
+    --pantry-accent:    #c87820;
+    --pantry-text:      #5a2c04;
+    --pantry-count-bg:  #f0c060;
+
+    /* Fish Tank — ocean blue */
+    --fish-bg:        #e8f4fd;
+    --fish-header:    #c0dff5;
+    --fish-border:    #80bce8;
+    --fish-title:     #0d3d6e;
+    --fish-sub:       #1862a8;
+    --fish-bundle-bg: #c0dff5;
+    --fish-accent:    #1862a8;
+    --fish-text:      #082848;
+    --fish-count-bg:  #80bce8;
+
+    /* Boiler Room — forge orange-red */
+    --boiler-bg:        #fdf0e8;
+    --boiler-header:    #f8d0b0;
+    --boiler-border:    #e89060;
+    --boiler-title:     #7a2808;
+    --boiler-sub:       #b84010;
+    --boiler-bundle-bg: #f8d0b0;
+    --boiler-accent:    #c85020;
+    --boiler-text:      #581804;
+    --boiler-count-bg:  #f0a060;
+
+    /* Bulletin Board — rose pink */
+    --bulletin-bg:        #fef0f5;
+    --bulletin-header:    #fcd8e8;
+    --bulletin-border:    #f0a0c8;
+    --bulletin-title:     #7a1040;
+    --bulletin-sub:       #b82060;
+    --bulletin-bundle-bg: #fcd8e8;
+    --bulletin-accent:    #b82060;
+    --bulletin-text:      #580828;
+    --bulletin-count-bg:  #f0a0c8;
+
+    /* Vault — royal purple-gold */
+    --vault-bg:        #f5f0fe;
+    --vault-header:    #e0d0f8;
+    --vault-border:    #b898e8;
+    --vault-title:     #3d1878;
+    --vault-sub:       #6830b8;
+    --vault-bundle-bg: #e0d0f8;
+    --vault-accent:    #6830b8;
+    --vault-text:      #280c58;
+    --vault-count-bg:  #c8a8f0;
+
+    --body-bg: #fdf5dc; --body-color: #2a1a08; --sticky-bg: #fdf5dc;
+    --h1-color: #807267; --h1-span-color: #6b8a50;
+    --search-popup-bg: #fdf5dc; --search-input-bg: #ffffff; --search-input-color: #2a1a08;
+    --autocomplete-bg: #ffffff; --autocomplete-color: #000000;
+    --tooltip-bg: #ffffff; --tooltip-color: #2a1a08; --item-tooltip-bg: white;
+    --footer-color: rgba(60,80,40,0.4); --progress-color: #807267;
+    --reset-btn-bg: #e8d8b8; --no-results-color: #807267;
+    --disclaimer-color: rgba(60,80,40,0.45);
+    --tooltip-source-color: rgba(40,30,10,0.75);
+  }
+  body.dark-mode {
+    --body-bg: #1a1a12; --body-color: #d4c9a8; --sticky-bg: #1f1f16;
+    --h1-color: #a89880; --h1-span-color: #7aaa58;
+    --search-popup-bg: #252518; --search-input-bg: #2e2e20; --search-input-color: #d4c9a8;
+    --autocomplete-bg: #2e2e20; --autocomplete-color: #d4c9a8;
+    --tooltip-bg: #2e2e20; --tooltip-color: #d4c9a8; --item-tooltip-bg: #2e2e20;
+    --footer-color: rgba(180,170,130,0.5); --progress-color: #a89880;
+    --reset-btn-bg: #3a3020; --no-results-color: #a89880;
+    --disclaimer-color: rgba(200,185,140,0.65);
+    --tooltip-source-color: rgba(200,185,140,0.8);
+    --craft-bg:#1a2214;--craft-header:#243018;--craft-border:#4a7830;--craft-title:#7acc50;--craft-sub:#5aaa38;--craft-bundle-bg:#1e2a18;--craft-accent:#5aaa38;--craft-text:#a8d888;--craft-count-bg:#2a3a1c;
+    --pantry-bg:#221a0c;--pantry-header:#302210;--pantry-border:#906018;--pantry-title:#e8a848;--pantry-sub:#c88030;--pantry-bundle-bg:#281e10;--pantry-accent:#c88030;--pantry-text:#e8c888;--pantry-count-bg:#382810;
+    --fish-bg:#0e1820;--fish-header:#142030;--fish-border:#2a5888;--fish-title:#60a8e8;--fish-sub:#4888c8;--fish-bundle-bg:#101c28;--fish-accent:#4888c8;--fish-text:#88c4f0;--fish-count-bg:#1a2e40;
+    --boiler-bg:#221008;--boiler-header:#301808;--boiler-border:#904030;--boiler-title:#f08050;--boiler-sub:#d05030;--boiler-bundle-bg:#281408;--boiler-accent:#d05030;--boiler-text:#f0a888;--boiler-count-bg:#381c10;
+    --bulletin-bg:#200e14;--bulletin-header:#2e1020;--bulletin-border:#883060;--bulletin-title:#e870a0;--bulletin-sub:#c84880;--bulletin-bundle-bg:#261018;--bulletin-accent:#c84880;--bulletin-text:#f0a0c8;--bulletin-count-bg:#341828;
+    --vault-bg:#180c28;--vault-header:#221040;--vault-border:#604898;--vault-title:#b888f0;--vault-sub:#9060d0;--vault-bundle-bg:#1c1030;--vault-accent:#9060d0;--vault-text:#d0a8f8;--vault-count-bg:#2c1850;
+    --btn-spring-bg:#2a4010;--btn-spring-color:#90d860;
+    --btn-summer-bg:#3a2808;--btn-summer-color:#e8b840;
+    --btn-fall-bg:#3a1808;--btn-fall-color:#e89060;
+    --btn-winter-bg:#0c2440;--btn-winter-color:#70b8f0;
+    --btn-rain-bg:#0a1e38;--btn-rain-color:#50a0e0;
+    --btn-uncollected-bg:#300c0c;--btn-uncollected-color:#f07070;
+    --btn-search-bg:#2e2e20;--btn-search-color:#d4c9a8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { height: 100%; }
+
+  body {
+    background-color: var(--body-bg);
+    font-family: 'VT323', monospace;
+    color: var(--body-color);
+    min-height: 100vh;
+    padding: 2.5rem clamp(1rem, 4vw, 4rem) 5rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .header-emblem {
+    font-size: 4.16rem;
+    margin-bottom: 0rem;
+  }
+
+  h1 {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 600;
+    color: var(--h1-color);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  h1 span {
+    display: block;
+    font-family: 'VT323', monospace;
+    font-size: 0.5em;
+    font-weight: 500;
+    color: var(--h1-span-color);
+    letter-spacing: 0.08em;
+    margin-top: 0.3em;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.9rem auto;
+    max-width: 400px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(80,120,40,0.3);
+  }
+  .divider-icon { color: #4a9e28; font-size: 0.78rem; }
+
+  /* Search */
+
+  /* Search button + popup */
+  .search-btn-wrap {
+    position: relative;
+  }
+
+  .search-toggle-btn {
+    background: #ffffff !important;
+    color: #5a3a10 !important;
+    border-top: 3px solid #e0e0e0 !important;
+    border-left: 3px solid #e0e0e0 !important;
+    border-right: 3px solid #e0e0e0 !important;
+    border-bottom: 3px solid #e0e0e0 !important;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.25) !important;
+    width: 2.8rem !important;
+    height: 2.8rem !important;
+    padding: 0 !important;
+    font-size: 1.4rem !important;
+    box-sizing: border-box !important;
+  }
+  .search-toggle-btn.active {
+    border-top: 3px solid #e0e0e0 !important;
+    border-left: 3px solid #e0e0e0 !important;
+    border-right: 3px solid #e0e0e0 !important;
+    border-bottom: 3px solid #e0e0e0 !important;
+    box-shadow: none !important;
+  }
+
+  .search-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    bottom: auto;
+    left: 0;
+    z-index: 200;
+    background: var(--search-popup-bg);
+    border: 2px solid rgba(80,120,40,0.25);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    padding: 0.5rem;
+  }
+  .search-popup.open {
+    display: block;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(60,80,40,0.6);
+    cursor: pointer;
+    display: none;
+    padding: 2px;
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    line-height: 1;
+    image-rendering: pixelated;
+    letter-spacing: 0;
+  }
+  .search-clear:hover { color: rgba(60,80,40,1); }
+  .search-clear::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--tooltip-bg);
+    color: var(--tooltip-color);
+    font-family: 'Silkscreen', monospace;
+    font-size: 1rem;
+    white-space: nowrap;
+    padding: 0.3rem 0.6rem;
+    border: 2px solid rgba(0,0,0,0.15);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 300;
+  }
+  .search-clear:hover::after { opacity: 1; }
+
+  .autocomplete-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: var(--autocomplete-bg);
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 3px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 100;
+    display: none;
+  }
+
+  .autocomplete-item {
+    padding: 0.65rem 1.3rem;
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    color: var(--autocomplete-color);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .autocomplete-item:hover, .autocomplete-item.active {
+    background: rgba(80,160,40,0.12);
+    color: #1a3a08;
+  }
+  .autocomplete-item em {
+    font-style: normal;
+    color: #3a9830;
+    font-weight: 700;
+  }
+
+  /* Search results */
+  .search-results {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .search-result-group {
+    border: 3px solid;
+    border-radius: 4px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  .search-result-room {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 0.5rem 1.3rem 0.3rem;
+  }
+
+  .search-result-room-reward {
+    padding: 0 1.3rem 0.5rem;
+    border-bottom: 2px solid rgba(0,0,0,0.12);
+    margin-bottom: 0.4rem;
+  }
+
+  .search-result-bundle {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding: 0.1rem 1.3rem 0.3rem 3.5rem;
+  }
+  .search-result-bundle.complete { text-decoration: line-through; opacity: 0.5; }
+  .search-result-group.complete .search-result-room { text-decoration: line-through; opacity: 0.5; }
+
+  .search-result-items {
+    padding: 0.5rem 1.3rem 0.9rem 3.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-top: 0.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .no-results {
+    text-align: center;
+    color: var(--no-results-color);
+    font-style: normal;
+    padding: 2rem;
+    font-size: 1rem;
+    font-family: 'Silkscreen', monospace;
+    line-height: 1.8;
+  }
+
+  /* Rooms grid */
+  .rooms-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .room-card {
+    border: 3px solid;
+    border-radius: 4px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .room-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  .room-header {
+    padding: 0.5rem 1.5rem 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1.5px solid rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  .room-title-wrap { flex: 1; }
+
+  .room-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+  }
+
+  .room-reward {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.25rem;
+    font-style: normal;
+    margin-top: 0.1rem;
+    transition: color 0.3s;
+    font-weight: 400;
+    opacity: 0.65;
+    text-transform: uppercase;
+  }
+
+  .room-count {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .complete-badge {
+    font-size: 0.975rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .room-card.complete .complete-badge { opacity: 1; }
+  .room-card.complete .room-name { text-decoration: line-through; opacity: 0.5; }
+  .room-card.complete .room-reward { text-decoration: line-through; opacity: 0.4; }
+
+  .bundle-reward-row {
+    padding: 0 1rem 0.45rem 1rem;
+  }
+  .search-result-group .bundle-reward-row {
+    padding: 0 1rem 0.45rem 3.5rem;
+  }
+
+  .bundle-reward {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    font-style: normal;
+    white-space: nowrap;
+    opacity: 0.75;
+    font-weight: 400;
+  }
+
+  /* Bundles */
+  .bundles-list {
+    padding: 1rem 1.2rem 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .bundle {
+    border: 2px solid;
+    border-radius: 3px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+
+  .bundle-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .bundle-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .bundle-dot.done { background: currentColor; }
+
+  .bundle-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.3rem;
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .bundle.complete .bundle-name { text-decoration: line-through; opacity: 0.5; }
+  .bundle.complete .bundle-reward { text-decoration: line-through; opacity: 0.4; }
+  .bundle-reward.complete { text-decoration: line-through; opacity: 0.4; }
+  .room-reward.complete { text-decoration: line-through; opacity: 0.4; }
+
+  .bundle-items {
+    padding: 0 1rem 0.4rem 2.4rem;
+    display: grid;
+    gap: 0.05rem;
+  }
+  .bundle-items.two-col { grid-template-columns: 1fr 1fr; grid-auto-flow: column; }
+  .bundle-items.one-col  { grid-template-columns: 1fr; }
+
+  .item-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.08rem 0.3rem;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 6px;
+    transition: background 0.12s;
+  }
+  .item-row:hover { background: rgba(0,0,0,0.05); }
+
+  .item-check {
+    width: 17px; height: 17px;
+    border-radius: 0;
+    border: none;
+    border-top: 2px solid rgba(0,0,0,0.3);
+    border-left: 2px solid rgba(0,0,0,0.25);
+    border-right: 2px solid rgba(255,255,255,0.6);
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Silkscreen', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    transition: all 0.1s;
+    background: rgba(255,255,255,0.45);
+    opacity: 0.6;
+  }
+
+  .item-row.checked .item-check {
+    opacity: 1;
+    color: white;
+    border-top: 2px solid rgba(255,255,255,0.55);
+    border-left: 2px solid rgba(255,255,255,0.45);
+    border-right: 2px solid rgba(0,0,0,0.35);
+    border-bottom: 2px solid rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  }
+
+  .item-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: opacity 0.15s;
+    line-height: 1.7;
+  }
+
+  .item-row.checked .item-name {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+
+  .item-row.surplus {
+    cursor: default;
+    pointer-events: none;
+  }
+  .item-row.surplus .item-name {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+  .item-row.surplus .item-check {
+    opacity: 0.6;
+  }
+
+  .item-note {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-left: auto;
+    white-space: nowrap;
+    opacity: 0.5;
+  }
+
+  .bundle-progress {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-right: 0.4rem;
+    opacity: 0.7;
+  }
+
+  .room-craft    .bundle-progress { color: var(--craft-title); }
+  .room-pantry   .bundle-progress { color: var(--pantry-title); }
+  .room-fish     .bundle-progress { color: var(--fish-title); }
+  .room-boiler   .bundle-progress { color: var(--boiler-title); }
+  .room-bulletin .bundle-progress { color: var(--bulletin-title); }
+  .room-vault    .bundle-progress { color: var(--vault-title); }
+
+  /* Per-room theming */
+  .room-craft    { background: var(--craft-bg);    border-color: var(--craft-border); }
+  .room-pantry   { background: var(--pantry-bg);   border-color: var(--pantry-border); }
+  .room-fish     { background: var(--fish-bg);     border-color: var(--fish-border); }
+  .room-boiler   { background: var(--boiler-bg);   border-color: var(--boiler-border); }
+  .room-bulletin { background: var(--bulletin-bg); border-color: var(--bulletin-border); }
+  .room-vault    { background: var(--vault-bg);    border-color: var(--vault-border); }
+
+  .room-craft    .room-header { background: var(--craft-header); }
+  .room-pantry   .room-header { background: var(--pantry-header); }
+  .room-fish     .room-header { background: var(--fish-header); }
+  .room-boiler   .room-header { background: var(--boiler-header); }
+  .room-bulletin .room-header { background: var(--bulletin-header); }
+  .room-vault    .room-header { background: var(--vault-header); }
+
+  .room-craft    .room-name { color: var(--craft-title); }
+  .room-pantry   .room-name { color: var(--pantry-title); }
+  .room-fish     .room-name { color: var(--fish-title); }
+  .room-boiler   .room-name { color: var(--boiler-title); }
+  .room-bulletin .room-name { color: var(--bulletin-title); }
+  .room-vault    .room-name { color: var(--vault-title); }
+
+  .room-craft    .room-reward { color: var(--craft-sub); }
+  .room-pantry   .room-reward { color: var(--pantry-sub); }
+  .room-fish     .room-reward { color: var(--fish-sub); }
+  .room-boiler   .room-reward { color: var(--boiler-sub); }
+  .room-bulletin .room-reward { color: var(--bulletin-sub); }
+  .room-vault    .room-reward { color: var(--vault-sub); }
+
+  .room-craft    .room-count { background: var(--craft-count-bg);    color: var(--craft-title); }
+  .room-pantry   .room-count { background: var(--pantry-count-bg);   color: var(--pantry-title); }
+  .room-fish     .room-count { background: var(--fish-count-bg);     color: var(--fish-title); }
+  .room-boiler   .room-count { background: var(--boiler-count-bg);   color: var(--boiler-title); }
+  .room-bulletin .room-count { background: var(--bulletin-count-bg); color: var(--bulletin-title); }
+  .room-vault    .room-count { background: var(--vault-count-bg);    color: var(--vault-title); }
+
+  .room-craft    .bundle { background: var(--craft-bundle-bg);    border-color: var(--craft-border); }
+  .room-pantry   .bundle { background: var(--pantry-bundle-bg);   border-color: var(--pantry-border); }
+  .room-fish     .bundle { background: var(--fish-bundle-bg);     border-color: var(--fish-border); }
+  .room-boiler   .bundle { background: var(--boiler-bundle-bg);   border-color: var(--boiler-border); }
+  .room-bulletin .bundle { background: var(--bulletin-bundle-bg); border-color: var(--bulletin-border); }
+  .room-vault    .bundle { background: var(--vault-bundle-bg);    border-color: var(--vault-border); }
+
+  .room-craft    .bundle-dot { color: var(--craft-accent); }
+  .room-pantry   .bundle-dot { color: var(--pantry-accent); }
+  .room-fish     .bundle-dot { color: var(--fish-accent); }
+  .room-boiler   .bundle-dot { color: var(--boiler-accent); }
+  .room-bulletin .bundle-dot { color: var(--bulletin-accent); }
+  .room-vault    .bundle-dot { color: var(--vault-accent); }
+
+  .room-craft    .bundle-name { color: var(--craft-title); }
+  .room-pantry   .bundle-name { color: var(--pantry-title); }
+  .room-fish     .bundle-name { color: var(--fish-title); }
+  .room-boiler   .bundle-name { color: var(--boiler-title); }
+  .room-bulletin .bundle-name { color: var(--bulletin-title); }
+  .room-vault    .bundle-name { color: var(--vault-title); }
+
+  .room-craft    .bundle-reward { color: var(--craft-accent); }
+  .room-pantry   .bundle-reward { color: var(--pantry-accent); }
+  .room-fish     .bundle-reward { color: var(--fish-accent); }
+  .room-boiler   .bundle-reward { color: var(--boiler-accent); }
+  .room-bulletin .bundle-reward { color: var(--bulletin-accent); }
+  .room-vault    .bundle-reward { color: var(--vault-accent); }
+
+  .room-craft    .item-name { color: var(--craft-text); }
+  .room-pantry   .item-name { color: var(--pantry-text); }
+  .room-fish     .item-name { color: var(--fish-text); }
+  .room-boiler   .item-name { color: var(--boiler-text); }
+  .room-bulletin .item-name { color: var(--bulletin-text); }
+  .room-vault    .item-name { color: var(--vault-text); }
+
+  .room-craft    .item-row.surplus .item-name { color: var(--craft-text); }
+  .room-pantry   .item-row.surplus .item-name { color: var(--pantry-text); }
+  .room-fish     .item-row.surplus .item-name { color: var(--fish-text); }
+  .room-boiler   .item-row.surplus .item-name { color: var(--boiler-text); }
+  .room-bulletin .item-row.surplus .item-name { color: var(--bulletin-text); }
+  .room-vault    .item-row.surplus .item-name { color: var(--vault-text); }
+
+  .room-craft    .item-check { color: var(--craft-accent); }
+  .room-pantry   .item-check { color: var(--pantry-accent); }
+  .room-fish     .item-check { color: var(--fish-accent); }
+  .room-boiler   .item-check { color: var(--boiler-accent); }
+  .room-bulletin .item-check { color: var(--bulletin-accent); }
+  .room-vault    .item-check { color: var(--vault-accent); }
+
+  .room-craft    .item-row.checked .item-check { background: var(--craft-accent); }
+  .room-pantry   .item-row.checked .item-check { background: var(--pantry-accent); }
+  .room-fish     .item-row.checked .item-check { background: var(--fish-accent); }
+  .room-boiler   .item-row.checked .item-check { background: var(--boiler-accent); }
+  .room-bulletin .item-row.checked .item-check { background: var(--bulletin-accent); }
+  .room-vault    .item-row.checked .item-check { background: var(--vault-accent); }
+
+  /* Search result groups get room theme colors too */
+  .search-result-group.room-craft    { background: var(--craft-bg);    border-color: var(--craft-border); }
+  .search-result-group.room-pantry   { background: var(--pantry-bg);   border-color: var(--pantry-border); }
+  .search-result-group.room-fish     { background: var(--fish-bg);     border-color: var(--fish-border); }
+  .search-result-group.room-boiler   { background: var(--boiler-bg);   border-color: var(--boiler-border); }
+  .search-result-group.room-bulletin { background: var(--bulletin-bg); border-color: var(--bulletin-border); }
+  .search-result-group.room-vault    { background: var(--vault-bg);    border-color: var(--vault-border); }
+
+  .search-result-group.room-craft    .search-result-room { color: var(--craft-title); }
+  .search-result-group.room-pantry   .search-result-room { color: var(--pantry-title); }
+  .search-result-group.room-fish     .search-result-room { color: var(--fish-title); }
+  .search-result-group.room-boiler   .search-result-room { color: var(--boiler-title); }
+  .search-result-group.room-bulletin .search-result-room { color: var(--bulletin-title); }
+  .search-result-group.room-vault    .search-result-room { color: var(--vault-title); }
+
+  .search-result-group.room-craft    .search-result-bundle { color: var(--craft-sub); }
+  .search-result-group.room-pantry   .search-result-bundle { color: var(--pantry-sub); }
+  .search-result-group.room-fish     .search-result-bundle { color: var(--fish-sub); }
+  .search-result-group.room-boiler   .search-result-bundle { color: var(--boiler-sub); }
+  .search-result-group.room-bulletin .search-result-bundle { color: var(--bulletin-sub); }
+  .search-result-group.room-vault    .search-result-bundle { color: var(--vault-sub); }
+
+  .search-result-group.room-craft    .item-name { color: var(--craft-text); }
+  .search-result-group.room-pantry   .item-name { color: var(--pantry-text); }
+  .search-result-group.room-fish     .item-name { color: var(--fish-text); }
+  .search-result-group.room-boiler   .item-name { color: var(--boiler-text); }
+  .search-result-group.room-bulletin .item-name { color: var(--bulletin-text); }
+  .search-result-group.room-vault    .item-name { color: var(--vault-text); }
+
+  .search-result-group.room-craft    .item-row.surplus .item-name { color: var(--craft-text); }
+  .search-result-group.room-pantry   .item-row.surplus .item-name { color: var(--pantry-text); }
+  .search-result-group.room-fish     .item-row.surplus .item-name { color: var(--fish-text); }
+  .search-result-group.room-boiler   .item-row.surplus .item-name { color: var(--boiler-text); }
+  .search-result-group.room-bulletin .item-row.surplus .item-name { color: var(--bulletin-text); }
+  .search-result-group.room-vault    .item-row.surplus .item-name { color: var(--vault-text); }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.78rem;
+    color: var(--footer-color);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  /* Filter toggle */
+  .filter-wrap {
+    max-width: 100%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .filter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    cursor: pointer;
+    user-select: none;
+    font-family: 'VT323', monospace;
+    font-size: 0.806rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(60,80,40,0.55);
+    transition: color 0.2s;
+  }
+  .filter-label:hover { color: rgba(60,80,40,0.85); }
+
+  .filter-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 32px;
+    height: 18px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.1);
+    border: 1.5px solid rgba(0,0,0,0.15);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .filter-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(60,80,40,0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .filter-toggle:checked {
+    background: #3a9830;
+    border-color: #2d7820;
+  }
+  .filter-toggle:checked::after {
+    transform: translateX(14px);
+    background: white;
+  }
+  .filter-label.active { color: #2d7820; }
+
+  /* Sticky search + filter bar */
+  .sticky-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--sticky-bg);
+    padding: 0.75rem clamp(1rem, 4vw, 4rem);
+    margin: 0 calc(-1 * clamp(1rem, 4vw, 4rem));
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    border-bottom: 1.5px solid rgba(80,140,40,0.2);
+  }
+
+  .sticky-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .progress-inline {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .progress-text {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: var(--progress-color);
+  }
+
+  .reset-btn {
+    font-size: 2rem;
+    color: #7a7a7a;
+    cursor: pointer;
+    padding: 0;
+    width: 1.7rem;
+    height: 1.7rem;
+    line-height: 1;
+    border-radius: 0;
+    border: none;
+    border-top: 3px solid rgba(255,255,255,0.55);
+    border-left: 3px solid rgba(255,255,255,0.45);
+    border-right: 3px solid rgba(0,0,0,0.35);
+    border-bottom: 3px solid rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+    background: var(--reset-btn-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, filter 0.1s, transform 0.1s, box-shadow 0.1s;
+    position: relative;
+  }
+  body.dark-mode .reset-btn img { filter: invert(1) sepia(1) saturate(0.3) hue-rotate(10deg) brightness(0.85); }
+  .reset-btn:hover {
+    color: #c04040;
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+  }
+  .reset-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+    border-top: 3px solid rgba(0,0,0,0.35);
+    border-left: 3px solid rgba(0,0,0,0.3);
+    border-right: 3px solid rgba(255,255,255,0.4);
+    border-bottom: 3px solid rgba(255,255,255,0.5);
+  }
+
+  /* Season filter buttons */
+  .season-filter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    background: var(--search-input-bg);
+    border: none;
+    border-top: 3px solid rgba(0,0,0,0.25);
+    border-left: 3px solid rgba(0,0,0,0.2);
+    border-right: 3px solid rgba(255,255,255,0.6);
+    border-bottom: 3px solid rgba(255,255,255,0.5);
+    outline: 1.5px solid #cccccc;
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08);
+    border-radius: 0;
+    padding: 0.35rem 1.25rem 0.35rem 0.75rem;
+    line-height: 1;
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    color: var(--search-input-color);
+    width: 220px;
+    transition: outline-color 0.15s;
+  }
+  .search-input::placeholder {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    color: rgba(60,80,40,0.4);
+  }
+  .search-input:focus {
+    outline-color: #aaaaaa;
+  }
+
+  .season-btn {
+    font-family: 'VT323', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0.45rem 0.65rem 0.25rem;
+    /* pixelated hard square corners — no rounding */
+    border-radius: 0;
+    /* chunky inset bevel for that retro pressed-button feel */
+    border: none;
+    border-top: 3px solid rgba(255,255,255,0.55);
+    border-left: 3px solid rgba(255,255,255,0.45);
+    border-right: 3px solid rgba(0,0,0,0.35);
+    border-bottom: 3px solid rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: filter 0.1s, transform 0.1s, box-shadow 0.1s;
+    position: relative;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    image-rendering: pixelated;
+  }
+  .season-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+  }
+  .season-btn:active,
+  .season-btn.active {
+    transform: translateY(1px);
+    box-shadow: none;
+    border-top: 3px solid rgba(0,0,0,0.35);
+    border-left: 3px solid rgba(0,0,0,0.3);
+    border-right: 3px solid rgba(255,255,255,0.4);
+    border-bottom: 3px solid rgba(255,255,255,0.5);
+  }
+
+  /* Filter button tooltip */
+  .season-btn::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--tooltip-bg);
+    color: var(--tooltip-color);
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 0.4rem 0.9rem;
+    border-radius: 3px;
+    border: 2px solid rgba(0,0,0,0.15);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    z-index: 200;
+  }
+  .season-btn::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #ffffff;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 200;
+  }
+  .season-btn:hover::after,
+  .season-btn:hover::before { opacity: 1; }
+
+  /* When inside sticky bar, flip tooltips to show below the buttons */
+  .sticky-bar .season-btn::after {
+    bottom: auto;
+    top: calc(100% + 8px);
+  }
+  .sticky-bar .season-btn::before {
+    bottom: auto;
+    top: calc(100% + 2px);
+    border-top-color: transparent;
+    border-bottom-color: #ffffff;
+  }
+
+  /* Fix search tooltip from being clipped on the left */
+  .sticky-bar .search-toggle-btn::after {
+    left: 0;
+    transform: none;
+  }
+  .sticky-bar .search-toggle-btn::before {
+    left: 1rem;
+    transform: none;
+  }
+
+  .season-btn:not(.rain) {
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+  }
+  .season-btn.spring  { color: #3a6e10; border-color: rgba(120,190,40,0.4);  background: #d8f0a0; }
+  .season-btn.summer  { color: #7a4008; border-color: rgba(200,130,20,0.4);  background: #f5d888; }
+  .season-btn.fall    { color: #7a2808; border-color: rgba(200,80,20,0.4);   background: #f5b888; }
+  .season-btn.winter  { color: #1a5a9e; border-color: rgba(100,160,220,0.4); background: #d0e8f8; }
+  .season-btn.rain    { color: #0a3060; border-color: rgba(20,80,160,0.4);   background: #90c0e8; height: 2.8rem; padding: 0 0.5rem; }
+
+  .season-btn.spring.active  { border-color: #3a6e10; box-shadow: 0 0 0 2px rgba(120,190,40,0.3); }
+  .season-btn.summer.active  { border-color: #7a4008; box-shadow: 0 0 0 2px rgba(200,130,20,0.3); }
+  .season-btn.fall.active    { border-color: #7a2808; box-shadow: 0 0 0 2px rgba(200,80,20,0.3); }
+  .season-btn.winter.active  { border-color: #1a5a9e; box-shadow: 0 0 0 2px rgba(100,160,220,0.3); }
+  .season-btn.rain.active    { border-color: #0a3060; box-shadow: 0 0 0 2px rgba(20,80,160,0.3); }
+
+  .season-btn.uncollected { color: #7a1a1a; border-color: rgba(180,50,50,0.4); background: #f5c8c8; }
+  .season-btn.uncollected.active { border-color: #7a1a1a; box-shadow: 0 0 0 2px rgba(180,50,50,0.3); }
+
+
+
+
+  /* Fade non-active buttons when any is active */
+  .season-filter-wrap.has-active .season-btn:not(.active):not(.search-toggle-btn) {
+    opacity: 0.35;
+    filter: grayscale(0.4);
+  }
+  .season-filter-wrap.has-active .season-btn:not(.active):not(.search-toggle-btn):hover {
+    opacity: 0.6;
+    filter: grayscale(0);
+  }
+
+  /* Item tooltip */
+  .item-tooltip {
+    position: fixed;
+    z-index: 999;
+    background: var(--item-tooltip-bg);
+    border: 2px solid rgba(80,120,40,0.5);
+    border-radius: 3px;
+    padding: 0.8rem 1rem;
+    max-width: 280px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+  }
+  .item-tooltip.visible { opacity: 1; }
+
+  .tooltip-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--body-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .tooltip-sources {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .tooltip-sources li {
+    font-family: 'Silkscreen', monospace;
+    font-size: 1.1rem;
+    color: var(--tooltip-source-color);
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .tooltip-sources li::before {
+    content: '•';
+    color: #3a9830;
+    flex-shrink: 0;
+    font-size: 0.975rem;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+  ::-webkit-scrollbar-thumb { background: var(--brown-mid); border-radius: 3px; }
+
+
+  body.dark-mode .season-btn.spring      { background: var(--btn-spring-bg);      color: var(--btn-spring-color); }
+  body.dark-mode .season-btn.summer      { background: var(--btn-summer-bg);      color: var(--btn-summer-color); }
+  body.dark-mode .season-btn.fall        { background: var(--btn-fall-bg);        color: var(--btn-fall-color); }
+  body.dark-mode .season-btn.winter      { background: var(--btn-winter-bg);      color: var(--btn-winter-color); }
+  body.dark-mode .season-btn.rain        { background: var(--btn-rain-bg);        color: var(--btn-rain-color); }
+  body.dark-mode .season-btn.uncollected { background: var(--btn-uncollected-bg); color: var(--btn-uncollected-color); }
+  body.dark-mode .search-toggle-btn     { background: var(--btn-search-bg) !important; color: var(--btn-search-color) !important; }
+  .disclaimer { color: var(--disclaimer-color); }
+
+  @media (max-width: 500px) {
+    .rooms-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-emblem"><img src="data:image/png;base64,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" alt="Cat" style="width:64px;height:auto;image-rendering:pixelated;"></div>
+  <h1>Community Center Restoration Tracker</h1>
+</header>
+
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <div class="season-filter-wrap">
+      <div class="search-btn-wrap">
+        <button class="season-btn search-toggle-btn" id="search-toggle-btn" data-tip="Search (Ctrl + F)"><span style="position:relative;top:1px;">🔍</span></button>
+        <div class="search-popup" id="search-popup">
+          <div style="position:relative;">
+            <input class="search-input" id="search-input" type="text" placeholder="Search" autocomplete="off">
+            <button class="search-clear" id="search-clear" data-tip="Esc">X</button>
+            <div class="autocomplete-dropdown" id="autocomplete"></div>
+          </div>
+        </div>
+      </div>
+      <button class="season-btn spring" data-season="spring" data-tip="Spring"><span style="position:relative;top:1px;">🌸</span></button>
+      <button class="season-btn summer" data-season="summer" data-tip="Summer"><span style="position:relative;top:1.5px;">☀️</span></button>
+      <button class="season-btn fall"   data-season="fall"   data-tip="Fall"><span style="position:relative;top:1.5px;">🍂</span></button>
+      <button class="season-btn winter" data-season="winter" data-tip="Winter"><span style="position:relative;top:2px;">❄️</span></button>
+      <button class="season-btn rain"   data-season="rain"   data-tip="Rain Exclusive (Fish)"><span style="position:relative;top:3.5px;">🌧️</span><span style="position:relative;top:0px;">🐟</span></button>
+      <button class="season-btn uncollected" data-season="uncollected" id="uncollected-btn" data-tip="Uncollected Items Only"><span style="position:relative;top:2px;">🚫</span></button>
+    </div>
+    <div class="progress-inline">
+      <span class="progress-text" id="overall-pct">0 / 0 (0%)</span>
+      <button class="reset-btn" id="reset-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAACnCAYAAACb1CfSAAAB10lEQVR4nO3cQQ3CQBBAUSDIqghEIAsRiMBXMcBxCj/LewI2m83PnKY9nQAAAAAAAAAAAAAAAAAAgCHnIw6937Z94pzH8zVyv6n71Ey9T9Hl1xeAT4RJkjBJEiZJwiRJmCQJkyRhkiRMkoRJkjBJEiZJwiRJmCQJkyRhkiRMktIb7FNW3fSufSkwycQkSZgkCZMkYZIkTJKESZIwSRImScIkSZgkCZMkYZIkTJKESZIwSRImScIk6S822KcUN70nFDfhTUyShEmSMEkSJknCJEmYJAmTJGGSJEyShEmSMEkSJknCJEmYJAmTJGGSJEySrkccuuqmN99jYpIkTJKESZIwSRImScIkSZgkCZMkYZIkTJKESZIwSRImScIkSZgkCZMkYZIkTJKESZIwSRImScIkSZgkCZMkYZIkTJKESZIwSRImScIkSZgkCZMkYZIkTJKESVL6X+n327ZPnLPqP+FXfh8TkyRhkiRMkoRJkjBJEiZJwiRJmCQJkyRhkiRMkoRJkjBJEiZJwiRJmCQJk6Tc5vIRpja9a4qb51NMTJKESZIwSRImScIkSZgkCZMkYZIkTJKESZIwSRImScIkSZgkCZMkYZIkTAAAAAAAAAAAAAAA4I+9AVg1JwvAHzXIAAAAAElFTkSuQmCC" style="width:100%;height:100%;object-fit:contain;display:block;image-rendering:pixelated;"></button>
+    </div>
+  </div>
+</div>
+
+<div class="search-results" id="search-results" style="margin-top:3.5rem"></div>
+
+<div class="rooms-grid" id="rooms-grid" style="margin-top:3.5rem"></div>
+
+
+<div class="disclaimer" style="text-align:center; margin-top:3rem; padding: 0 1rem 1rem; font-family:'Silkscreen',monospace; font-size:0.85rem; font-style:italic; line-height:1.8;">
+  This is a fan-made tracker and is not affiliated with ConcernedApe or Stardew Valley.<br>
+  All game content, names, and imagery belong to their respective owners.
+</div>
+
+<div class="item-tooltip" id="item-tooltip">
+  <div class="tooltip-name" id="tooltip-name"></div>
+  <ul class="tooltip-sources" id="tooltip-sources"></ul>
+</div>
+
+<div class="item-tooltip" id="reset-tooltip" style="padding: 0.4rem 0.9rem;">
+  <span style="font-family:'Silkscreen',monospace; font-size:1.1rem; font-weight:500; color:var(--body-color);">Reset Progress</span>
+</div>
+
+<div class="item-tooltip" id="darkmode-tooltip" style="padding: 0.4rem 0.9rem;">
+  <span id="darkmode-tooltip-text" style="font-family:'Silkscreen',monospace; font-size:1.1rem; font-weight:500; color:var(--body-color);"></span>
+</div>
+
+<!-- Retro confirm modal -->
+<div id="reset-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+  <div id="reset-modal-box" style="
+    background:#fdf5dc;
+    border-top:4px solid rgba(255,255,255,0.7);
+    border-left:4px solid rgba(255,255,255,0.6);
+    border-right:4px solid rgba(0,0,0,0.5);
+    border-bottom:4px solid rgba(0,0,0,0.55);
+    box-shadow:6px 6px 0 rgba(0,0,0,0.35);
+    padding:1.5rem 2.5rem 1.5rem;
+    max-width:360px;
+    width:90%;
+    text-align:center;
+  ">
+    <div style="font-family:'Silkscreen',monospace;font-size:1.1rem;color:#807267;margin-bottom:1.5rem;line-height:1.8;text-transform:uppercase;font-style:normal;">Reset all progress?<br>This cannot be undone.</div>
+    <div style="display:flex;gap:1.5rem;justify-content:center;">
+      <button id="reset-confirm-yes" style="
+        font-family:'Silkscreen',monospace;font-size:1rem;text-transform:uppercase;
+        padding:0.45rem 1.2rem;
+        background:#c84040;color:#fff;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.5);
+        border-left:3px solid rgba(255,255,255,0.4);
+        border-right:3px solid rgba(0,0,0,0.4);
+        border-bottom:3px solid rgba(0,0,0,0.45);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.3);
+        cursor:pointer;
+      ">YES</button>
+      <button id="reset-confirm-no" style="
+        font-family:'Silkscreen',monospace;font-size:1rem;text-transform:uppercase;
+        padding:0.45rem 1.2rem;
+        background:#e8d8b8;color:#807267;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.55);
+        border-left:3px solid rgba(255,255,255,0.45);
+        border-right:3px solid rgba(0,0,0,0.35);
+        border-bottom:3px solid rgba(0,0,0,0.4);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.25);
+        cursor:pointer;
+      ">NO</button>
+    </div>
+  </div>
+</div>
+<script>
+const DATA = [
+  {
+    id: "crafts", name: "Crafts Room", icon: "🪵", subtitle: "Bridge, Greenhouse & more",
+    reward: "Bridge Repair", cssClass: "room-craft",
+    bundles: [
+      { name: "Spring Foraging Bundle", reward: "Spring Seeds (30)", items: [
+        { name: "Daffodil" }, { name: "Dandelion" }, { name: "Leek" }, { name: "Wild Horseradish" }
+      ]},
+      { name: "Summer Foraging Bundle", reward: "Summer Seeds (30)", items: [
+        { name: "Grape" }, { name: "Spice Berry" }, { name: "Sweet Pea" }
+      ]},
+      { name: "Fall Foraging Bundle", reward: "Fall Seeds (30)", items: [
+        { name: "Common Mushroom" }, { name: "Wild Plum" }, { name: "Hazelnut" }, { name: "Blackberry" }
+      ]},
+      { name: "Winter Foraging Bundle", reward: "Winter Seeds (30)", items: [
+        { name: "Winter Root" }, { name: "Crystal Fruit" }, { name: "Snow Yam" }, { name: "Crocus" }
+      ]},
+      { name: "Construction Bundle", reward: "Charcoal Kiln (1)", items: [
+        { name: "Wood ×99" }, { name: "Wood ×99" }, { name: "Stone ×99" }, { name: "Hardwood ×10" }
+      ]},
+      { name: "Exotic Foraging Bundle", required: 5, reward: "Autumn's Bounty (5)", items: [
+        { name: "Coconut" }, { name: "Cactus Fruit" }, { name: "Cave Carrot" },
+        { name: "Red Mushroom" }, { name: "Purple Mushroom" }, { name: "Maple Syrup" },
+        { name: "Oak Resin" }, { name: "Pine Tar" }, { name: "Morel" }
+      ]}
+    ]
+  },
+  {
+    id: "pantry", name: "The Pantry", icon: "🌾", subtitle: "Crafts Room rewards unlock",
+    reward: "Greenhouse Restored", cssClass: "room-pantry",
+    bundles: [
+      { name: "Spring Crops Bundle", reward: "Speed-Gro (20)", items: [
+        { name: "Parsnip" }, { name: "Green Bean" }, { name: "Cauliflower" }, { name: "Potato" }
+      ]},
+      { name: "Summer Crops Bundle", reward: "Quality Sprinkler (1)", items: [
+        { name: "Tomato" }, { name: "Hot Pepper" }, { name: "Blueberry" }, { name: "Melon" }
+      ]},
+      { name: "Fall Crops Bundle", reward: "Bee House (1)", items: [
+        { name: "Corn" }, { name: "Eggplant" }, { name: "Pumpkin" }, { name: "Yam" }
+      ]},
+      { name: "Quality Crops Bundle", required: 3, reward: "Preserves Jar (1)", items: [
+        { name: "Parsnip (gold quality) ×5" }, { name: "Melon (gold quality) ×5" },
+        { name: "Pumpkin (gold quality) ×5" }, { name: "Corn (gold quality) ×5" }
+      ]},
+      { name: "Animal Bundle", required: 5, reward: "Cheese Press (1)", items: [
+        { name: "Large Milk" }, { name: "Large Brown Egg" }, { name: "Large White Egg" },
+        { name: "Large Goat Milk" }, { name: "Wool" }, { name: "Duck Egg" }
+      ]},
+      { name: "Artisan Bundle", required: 6, reward: "Keg (1)", items: [
+        { name: "Truffle Oil" }, { name: "Cloth" }, { name: "Goat Cheese" },
+        { name: "Cheese" }, { name: "Honey" }, { name: "Jelly" },
+        { name: "Apple" }, { name: "Apricot" }, { name: "Orange" },
+        { name: "Peach" }, { name: "Pomegranate" }, { name: "Cherry" }
+      ]}
+    ]
+  },
+  {
+    id: "fish", name: "Fish Tank", icon: "🐟", subtitle: "Repairs & fishing perks",
+    reward: "Glittering Boulder Removed", cssClass: "room-fish",
+    bundles: [
+      { name: "River Fish Bundle", reward: "Deluxe Bait (30)", items: [
+        { name: "Sunfish" }, { name: "Catfish" },
+        { name: "Shad" }, { name: "Tiger Trout" }
+      ]},
+      { name: "Lake Fish Bundle", reward: "Dressed Spinner (1)", items: [
+        { name: "Largemouth Bass" }, { name: "Carp" }, { name: "Bullhead" }, { name: "Sturgeon" }
+      ]},
+      { name: "Ocean Fish Bundle", reward: "Warp Totem: Beach (5)", items: [
+        { name: "Sardine" }, { name: "Tuna" },
+        { name: "Red Snapper" }, { name: "Tilapia" }
+      ]},
+      { name: "Night Fishing Bundle", reward: "Glow Ring (1)", items: [
+        { name: "Walleye" }, { name: "Bream" }, { name: "Eel" }
+      ]},
+      { name: "Crab Pot Bundle", required: 5, reward: "Crab Pot (3)", items: [
+        { name: "Lobster" }, { name: "Crayfish" }, { name: "Crab" },
+        { name: "Cockle" }, { name: "Mussel" }, { name: "Shrimp" },
+        { name: "Snail" }, { name: "Periwinkle" }, { name: "Oyster" }, { name: "Clam" }
+      ]},
+      { name: "Specialty Fish Bundle", reward: "Dish O' The Sea (5)", items: [
+        { name: "Pufferfish" }, { name: "Ghostfish" }, { name: "Sandfish" }, { name: "Woodskip" }
+      ]}
+    ]
+  },
+  {
+    id: "boiler", name: "Boiler Room", icon: "🪣", subtitle: "Mine cart & furnace rewards",
+    reward: "Minecarts Repaired", cssClass: "room-boiler",
+    bundles: [
+      { name: "Blacksmith's Bundle", reward: "Furnace (1)", items: [
+        { name: "Copper Bar" }, { name: "Iron Bar" }, { name: "Gold Bar" }
+      ]},
+      { name: "Geologist's Bundle", reward: "Omni Geode (5)", items: [
+        { name: "Quartz" }, { name: "Earth Crystal" }, { name: "Frozen Tear" }, { name: "Fire Quartz" }
+      ]},
+      { name: "Adventurer's Bundle", required: 2, reward: "Small Magnet Ring (1)", items: [
+        { name: "Slime ×99" }, { name: "Bat Wing ×10" }, { name: "Solar Essence" }, { name: "Void Essence" }
+      ]}
+    ]
+  },
+  {
+    id: "bulletin", name: "Bulletin Board", icon: "📋", subtitle: "Friendship & heart events",
+    reward: "Friendship +2 Hearts", cssClass: "room-bulletin",
+    bundles: [
+      { name: "Chef's Bundle", reward: "Pink Cake (3)", items: [
+        { name: "Maple Syrup" }, { name: "Fiddlehead Fern" }, { name: "Truffle" },
+        { name: "Poppy" }, { name: "Maki Roll" }, { name: "Fried Egg" }
+      ]},
+      { name: "Dye Bundle", reward: "Seed Maker (1)", items: [
+        { name: "Red Mushroom" }, { name: "Sea Urchin" }, { name: "Sunflower" },
+        { name: "Duck Feather" }, { name: "Aquamarine" }, { name: "Red Cabbage" }
+      ]},
+      { name: "Field Research Bundle", reward: "Recycling Machine (1)", items: [
+        { name: "Purple Mushroom" }, { name: "Nautilus Shell" }, { name: "Chub" }, { name: "Frozen Geode" }
+      ]},
+      { name: "Fodder Bundle", reward: "Heater (1)", items: [
+        { name: "Wheat ×10" }, { name: "Hay ×10" }, { name: "Apple ×3" }
+      ]},
+      { name: "Enchanter's Bundle", reward: "Gold Bar (5)", items: [
+        { name: "Oak Resin" }, { name: "Wine" }, { name: "Rabbit's Foot" }, { name: "Pomegranate" }
+      ]}
+    ]
+  },
+  {
+    id: "vault", name: "The Vault", icon: "🔐", subtitle: "Bus to Calico Desert",
+    reward: "Bus Repaired", cssClass: "room-vault",
+    bundles: [
+      { name: "2,500g Bundle", reward: "Chocolate Cake (3)", items: [{ name: "2,500g" }] },
+      { name: "5,000g Bundle", reward: "Quality Fertilizer (30)", items: [{ name: "5,000g" }] },
+      { name: "10,000g Bundle", reward: "Lightning Rod (1)", items: [{ name: "10,000g" }] },
+      { name: "25,000g Bundle", reward: "Crystalarium (1)", items: [{ name: "25,000g" }] }
+    ]
+  }
+];
+
+// State
+let state = JSON.parse(localStorage.getItem('sdv_cc_state') || '{}');
+let filterUncollected = false;
+let seasonFilter = null; // null = no filter, or 'spring'/'summer'/'fall'/'winter'
+let rainFilter = false;
+
+const RAIN_FISH = new Set(["Catfish", "Shad", "Red Snapper", "Walleye", "Eel"]);
+
+const ITEM_SEASONS = {
+  "Wild Horseradish": ["spring"],
+  "Daffodil": ["spring"],
+  "Leek": ["spring"],
+  "Dandelion": ["spring"],
+  "Grape": ["summer","fall"],
+  "Spice Berry": ["summer"],
+  "Sweet Pea": ["summer"],
+  "Common Mushroom": ["fall"],
+  "Wild Plum": ["fall"],
+  "Hazelnut": ["fall"],
+  "Blackberry": ["fall"],
+  "Winter Root": ["winter"],
+  "Crystal Fruit": ["winter"],
+  "Snow Yam": ["winter"],
+  "Crocus": ["winter"],
+  "Wood": ["spring","summer","fall","winter"],
+  "Stone": ["spring","summer","fall","winter"],
+  "Hardwood": ["spring","summer","fall","winter"],
+  "Coconut": ["spring","summer","fall","winter"],
+  "Cactus Fruit": ["spring","summer","fall","winter"],
+  "Cave Carrot": ["spring","summer","fall","winter"],
+  "Red Mushroom": ["spring","summer","fall","winter"],
+  "Purple Mushroom": ["spring","summer","fall","winter"],
+  "Maple Syrup": ["spring","summer","fall","winter"],
+  "Oak Resin": ["spring","summer","fall","winter"],
+  "Pine Tar": ["spring","summer","fall","winter"],
+  "Morel": ["spring"],
+  "Parsnip": ["spring"],
+  "Green Bean": ["spring"],
+  "Cauliflower": ["spring"],
+  "Potato": ["spring"],
+  "Tomato": ["summer"],
+  "Hot Pepper": ["summer"],
+  "Blueberry": ["summer"],
+  "Melon": ["summer"],
+  "Corn": ["summer","fall"],
+  "Eggplant": ["fall"],
+  "Pumpkin": ["fall"],
+  "Yam": ["fall"],
+  "Large Milk": ["spring","summer","fall","winter"],
+  "Large Brown Egg": ["spring","summer","fall","winter"],
+  "Large White Egg": ["spring","summer","fall","winter"],
+  "Wool": ["spring","summer","fall","winter"],
+  "Duck Egg": ["spring","summer","fall","winter"],
+  "Truffle Oil": ["spring","summer","fall","winter"],
+  "Cloth": ["spring","summer","fall","winter"],
+  "Goat Cheese": ["spring","summer","fall","winter"],
+  "Cheese": ["spring","summer","fall","winter"],
+  "Honey": ["spring","summer","fall","winter"],
+  "Jelly": ["spring","summer","fall","winter"],
+  "Apple": ["fall"],
+  "Apricot": ["spring"],
+  "Orange": ["summer"],
+  "Peach": ["summer"],
+  "Pomegranate": ["fall"],
+  "Cherry": ["spring"],
+  "Sunfish": ["spring","summer"],
+  "Catfish": ["spring","summer","fall"],
+  "Shad": ["spring","summer","fall"],
+  "Tiger Trout": ["fall","winter"],
+  "Largemouth Bass": ["spring","summer","fall","winter"],
+  "Carp": ["spring","summer","fall","winter"],
+  "Bullhead": ["spring","summer","fall","winter"],
+  "Sturgeon": ["summer","winter"],
+  "Sardine": ["spring","fall","winter"],
+  "Tuna": ["summer","winter"],
+  "Red Snapper": ["summer","fall"],
+  "Tilapia": ["summer","fall"],
+  "Walleye": ["fall","winter"],
+  "Bream": ["spring","summer","fall","winter"],
+  "Eel": ["spring","fall"],
+  "Lobster": ["spring","summer","fall","winter"],
+  "Crayfish": ["spring","summer","fall","winter"],
+  "Crab": ["spring","summer","fall","winter"],
+  "Cockle": ["spring","summer","fall","winter"],
+  "Mussel": ["spring","summer","fall","winter"],
+  "Shrimp": ["spring","summer","fall","winter"],
+  "Snail": ["spring","summer","fall","winter"],
+  "Periwinkle": ["spring","summer","fall","winter"],
+  "Oyster": ["spring","summer","fall","winter"],
+  "Clam": ["spring","summer","fall","winter"],
+  "Pufferfish": ["summer"],
+  "Ghostfish": ["spring","summer","fall","winter"],
+  "Sandfish": ["spring","summer","fall","winter"],
+  "Woodskip": ["spring","summer","fall","winter"],
+  "Copper Bar": ["spring","summer","fall","winter"],
+  "Iron Bar": ["spring","summer","fall","winter"],
+  "Gold Bar": ["spring","summer","fall","winter"],
+  "Quartz": ["spring","summer","fall","winter"],
+  "Earth Crystal": ["spring","summer","fall","winter"],
+  "Frozen Tear": ["spring","summer","fall","winter"],
+  "Fire Quartz": ["spring","summer","fall","winter"],
+  "Slime": ["spring","summer","fall","winter"],
+  "Bat Wing": ["spring","summer","fall","winter"],
+  "Solar Essence": ["spring","summer","fall","winter"],
+  "Void Essence": ["spring","summer","fall","winter"],
+  "Fiddlehead Fern": ["summer"],
+  "Poppy": ["summer"],
+  "Maki Roll": ["spring","summer","fall","winter"],
+  "Fried Egg": ["spring","summer","fall","winter"],
+  "Sea Urchin": ["spring","summer","fall","winter"],
+  "Sunflower": ["summer","fall"],
+  "Duck Feather": ["spring","summer","fall","winter"],
+  "Aquamarine": ["spring","summer","fall","winter"],
+  "Red Cabbage": ["summer"],
+  "Nautilus Shell": ["winter"],
+  "Chub": ["spring","summer","fall","winter"],
+  "Frozen Geode": ["spring","summer","fall","winter"],
+  "Wheat": ["summer","fall"],
+  "Hay": ["spring","summer","fall","winter"],
+  "Wine": ["spring","summer","fall","winter"],
+  "Rabbit's Foot": ["spring","summer","fall","winter"]
+};
+
+function save() { localStorage.setItem('sdv_cc_state', JSON.stringify(state)); }
+
+function itemMatchesSeason(itemName) {
+  const base = itemName.replace(/\s*\(gold quality\)/i, '').replace(/\s*×\d+$/, '').trim();
+
+  // Rain filter: only show rain-only fish
+  if (rainFilter && !RAIN_FISH.has(base)) return false;
+
+  // Season filter
+  if (seasonFilter) {
+    const seasons = ITEM_SEASONS[base];
+    if (seasons && !seasons.includes(seasonFilter)) return false;
+  }
+
+  return true;
+}
+
+function getKey(roomId, bundleIdx, itemIdx) {
+  return `${roomId}_${bundleIdx}_${itemIdx}`;
+}
+
+function isChecked(roomId, bundleIdx, itemIdx) {
+  return !!state[getKey(roomId, bundleIdx, itemIdx)];
+}
+
+function toggle(roomId, bundleIdx, itemIdx) {
+  const k = getKey(roomId, bundleIdx, itemIdx);
+  state[k] = !state[k];
+  save();
+  render();
+}
+
+function getBundleProgress(room, bundleIdx) {
+  const bundle = room.bundles[bundleIdx];
+  const items = bundle.items;
+  const done = items.filter((_, i) => isChecked(room.id, bundleIdx, i)).length;
+  const required = bundle.required || items.length;
+  const effectiveDone = Math.min(done, required);
+  return { done: effectiveDone, total: required, complete: effectiveDone >= required };
+}
+
+function getRoomProgress(room) {
+  let done = 0, total = 0;
+  let allBundlesComplete = true;
+  room.bundles.forEach((_, bi) => {
+    const p = getBundleProgress(room, bi);
+    done += p.done; total += p.total;
+    if (!p.complete) allBundlesComplete = false;
+  });
+  return { done, total, complete: allBundlesComplete };
+}
+
+function getAllProgress() {
+  let done = 0, total = 0;
+  DATA.forEach(room => {
+    const p = getRoomProgress(room);
+    done += p.done; total += p.total;
+  });
+  return { done, total };
+}
+
+function render() {
+  const grid = document.getElementById('rooms-grid');
+  grid.innerHTML = '';
+
+  DATA.forEach(room => {
+    // When rain filter is on, only show the fish tank
+    if (rainFilter && room.id !== 'fish') return;
+
+    const rp = getRoomProgress(room);
+    const card = document.createElement('div');
+    card.className = `room-card ${room.cssClass}${rp.complete ? ' complete' : ''}`;
+
+    // Reorder bundles: fill left column top-to-bottom, then right column
+    const allBundles = room.bundles.map((bundle, bi) => ({ bundle, bi }));
+    const mid = Math.ceil(allBundles.length / 2);
+    const leftCol = allBundles.slice(0, mid);
+    const rightCol = allBundles.slice(mid);
+    const reordered = [];
+    for (let i = 0; i < mid; i++) {
+      if (leftCol[i])  reordered.push(leftCol[i]);
+      if (rightCol[i]) reordered.push(rightCol[i]);
+    }
+
+    const bundlesHtml = reordered.map(({ bundle, bi }) => {
+      const bp = getBundleProgress(room, bi);
+
+      // In filter mode, skip bundles that are already complete
+      if (filterUncollected && bp.complete) return '';
+
+      // When rain filter is on, skip bundles with no rain fish
+      const RAIN_SKIP_BUNDLES = new Set(["Lake Fish Bundle", "Crab Pot Bundle", "Specialty Fish Bundle"]);
+      if (rainFilter && RAIN_SKIP_BUNDLES.has(bundle.name)) return '';
+
+      // Skip bundle if no items match the season filter
+      if (seasonFilter && !bundle.items.some(item => itemMatchesSeason(item.name))) return '';
+
+      const bundleRequired = bundle.required || bundle.items.length;
+      const bundleDoneCount = bundle.items.filter((_, i) => isChecked(room.id, bi, i)).length;
+      const bundleSatisfied = bundleDoneCount >= bundleRequired;
+      const itemsHtml = bundle.items.map((item, ii) => {
+        const checked = isChecked(room.id, bi, ii);
+        if (filterUncollected && checked) return '';
+        if (!itemMatchesSeason(item.name)) return '';
+        const surplus = !checked && bundleSatisfied;
+        return `<div class="item-row${checked ? ' checked' : surplus ? ' surplus' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
+          <div class="item-check">${checked ? 'x' : ''}</div>
+          <span class="item-name">${item.name}</span>
+          ${item.note ? `<span class="item-note">${item.note}</span>` : ''}
+        </div>`;
+      }).join('');
+
+      // Skip bundle if all visible items have been filtered out
+      if (!itemsHtml.trim()) return '';
+
+      const visibleCount = itemsHtml.split('item-row').length - 1;
+      const isTwoCol = bundle.items.length > 4;
+      const colClass = isTwoCol ? 'two-col' : 'one-col';
+      const rowStyle = isTwoCol ? ` style="grid-template-rows: repeat(${Math.ceil(visibleCount / 2)}, auto);"` : '';
+      return `<div class="bundle${bp.complete ? ' complete' : ''}">
+        <div class="bundle-header">
+          <span class="bundle-name">${bundle.name}</span>
+          <span class="bundle-progress">${bp.done}/${bp.total}</span>
+        </div>
+        ${bundle.reward ? `<div class="bundle-reward-row"><span class="bundle-reward">🎁 ${bundle.reward}</span></div>` : ''}
+        <div class="bundle-items ${colClass}"${rowStyle}>${itemsHtml}</div>
+      </div>`;
+    }).join('');
+
+    const bundlesRendered = bundlesHtml.trim();
+    if (filterUncollected && !bundlesRendered) return;
+
+    card.innerHTML = `
+      <div class="room-header">
+        <div class="room-title-wrap">
+          <div class="room-name">${room.name}</div>
+          <div class="room-reward">🎁 ${room.reward}</div>
+        </div>
+        <div class="room-count">${rp.done}/${rp.total}</div>
+        <div class="complete-badge">✅</div>
+      </div>
+      <div class="bundles-list">${bundlesRendered}</div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  // Events
+  grid.querySelectorAll('.item-row:not(.surplus)').forEach(row => {
+    row.addEventListener('click', () => {
+      toggle(row.dataset.room, parseInt(row.dataset.bundle), parseInt(row.dataset.item));
+    });
+  });
+
+  // Progress bar
+  const { done, total } = getAllProgress();
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('overall-pct').textContent = `${done} / ${total} (${pct}%)`;
+}
+
+// ── Search ──────────────────────────────────────────────
+const searchInput    = document.getElementById('search-input');
+const searchClear    = document.getElementById('search-clear');
+const autocompleteEl = document.getElementById('autocomplete');
+const searchResults  = document.getElementById('search-results');
+const roomsGrid      = document.getElementById('rooms-grid');
+const searchToggleBtn = document.getElementById('search-toggle-btn');
+const searchPopup    = document.getElementById('search-popup');
+
+function openSearch() {
+  searchPopup.classList.add('open');
+  searchToggleBtn.classList.add('active');
+  setTimeout(() => { searchInput.focus(); searchInput.select(); }, 0);
+}
+
+function closeSearch() {
+  searchPopup.classList.remove('open');
+  searchToggleBtn.classList.remove('active');
+  autocompleteEl.style.display = 'none';
+}
+
+searchToggleBtn.addEventListener('click', () => {
+  if (searchPopup.classList.contains('open')) {
+    closeSearch();
+  } else {
+    openSearch();
+  }
+});
+
+// Close popup when clicking outside
+document.addEventListener('mousedown', e => {
+  if (!searchPopup.contains(e.target) && e.target !== searchToggleBtn) {
+    if (!searchInput.value.trim()) {
+      closeSearch();
+    } else {
+      autocompleteEl.style.display = 'none';
+    }
+  }
+});
+
+// Build flat list of all item names for autocomplete
+function getAllItemNames() {
+  const names = new Set();
+  DATA.forEach(room => {
+    names.add(room.name);
+    room.bundles.forEach(bundle => {
+      names.add(bundle.name);
+      bundle.items.forEach(item => names.add(item.name));
+    });
+  });
+  return [...names];
+}
+
+function highlightMatch(text, query) {
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  return text.slice(0, idx) + '<em>' + text.slice(idx, idx + query.length) + '</em>' + text.slice(idx + query.length);
+}
+
+const ROOM_COLORS = {
+  // Room names
+  'Crafts Room':    { bg: 'var(--craft-header)',    color: 'var(--craft-title)' },
+  'The Pantry':     { bg: 'var(--pantry-header)',   color: 'var(--pantry-title)' },
+  'Fish Tank':      { bg: 'var(--fish-header)',     color: 'var(--fish-title)' },
+  'Boiler Room':    { bg: 'var(--boiler-header)',   color: 'var(--boiler-title)' },
+  'Bulletin Board': { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  'The Vault':      { bg: 'var(--vault-header)',    color: 'var(--vault-title)' },
+  // Crafts Room bundles
+  'Spring Foraging Bundle':  { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  'Summer Foraging Bundle':  { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  'Fall Foraging Bundle':    { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  'Winter Foraging Bundle':  { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  'Construction Bundle':     { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  'Exotic Foraging Bundle':  { bg: 'var(--craft-header)', color: 'var(--craft-title)' },
+  // Pantry bundles
+  'Spring Crops Bundle':     { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  'Summer Crops Bundle':     { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  'Fall Crops Bundle':       { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  'Quality Crops Bundle':    { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  'Animal Bundle':           { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  'Artisan Bundle':          { bg: 'var(--pantry-header)', color: 'var(--pantry-title)' },
+  // Fish Tank bundles
+  'River Fish Bundle':       { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  'Lake Fish Bundle':        { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  'Ocean Fish Bundle':       { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  'Night Fishing Bundle':    { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  'Crab Pot Bundle':         { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  'Specialty Fish Bundle':   { bg: 'var(--fish-header)', color: 'var(--fish-title)' },
+  // Boiler Room bundles
+  "Blacksmith's Bundle":     { bg: 'var(--boiler-header)', color: 'var(--boiler-title)' },
+  "Geologist's Bundle":      { bg: 'var(--boiler-header)', color: 'var(--boiler-title)' },
+  "Adventurer's Bundle":     { bg: 'var(--boiler-header)', color: 'var(--boiler-title)' },
+  // Bulletin Board bundles
+  "Chef's Bundle":           { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  'Dye Bundle':              { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  'Field Research Bundle':   { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  'Fodder Bundle':           { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  "Enchanter's Bundle":      { bg: 'var(--bulletin-header)', color: 'var(--bulletin-title)' },
+  // Vault bundles
+  '2,500g Bundle':           { bg: 'var(--vault-header)', color: 'var(--vault-title)' },
+  '5,000g Bundle':           { bg: 'var(--vault-header)', color: 'var(--vault-title)' },
+  '10,000g Bundle':          { bg: 'var(--vault-header)', color: 'var(--vault-title)' },
+  '25,000g Bundle':          { bg: 'var(--vault-header)', color: 'var(--vault-title)' },
+};
+
+let autocompleteIndex = 0;
+
+function setAutocompleteActive(idx) {
+  const items = autocompleteEl.querySelectorAll('.autocomplete-item');
+  items.forEach((el, i) => el.classList.toggle('active', i === idx));
+  autocompleteIndex = idx;
+}
+
+function showAutocomplete(query) {
+  if (!query || query.length < 2) { autocompleteEl.style.display = 'none'; return; }
+  const all = getAllItemNames();
+  const matches = all.filter(n => n.toLowerCase().includes(query.toLowerCase())).slice(0, 8);
+  if (!matches.length) { autocompleteEl.style.display = 'none'; return; }
+  autocompleteEl.innerHTML = matches.map(m => {
+    const roomColor = ROOM_COLORS[m];
+    const style = roomColor
+      ? `style="background:${roomColor.bg};color:${roomColor.color};font-weight:bold;"`
+      : '';
+    return `<div class="autocomplete-item" data-value="${m}" ${style}>${highlightMatch(m, query)}</div>`;
+  }).join('');
+  autocompleteEl.style.display = 'block';
+  // Always highlight first item by default
+  setAutocompleteActive(0);
+  autocompleteEl.querySelectorAll('.autocomplete-item').forEach((el, i) => {
+    el.addEventListener('mouseover', () => setAutocompleteActive(i));
+    el.addEventListener('mousedown', e => {
+      e.preventDefault();
+      searchInput.value = el.dataset.value;
+      searchInput.select();
+      autocompleteEl.style.display = 'none';
+      doSearch(el.dataset.value);
+    });
+  });
+}
+
+function doSearch(query) {
+  const q = query.trim().toLowerCase();
+  searchClear.style.display = q ? 'block' : 'none';
+
+  if (!q) {
+    searchResults.style.display = 'none';
+    roomsGrid.style.display = 'flex';
+    return;
+  }
+
+  roomsGrid.style.display = 'none';
+  searchResults.style.display = 'flex';
+
+  const groups = [];
+
+  DATA.forEach(room => {
+    if (rainFilter && room.id !== 'fish') return;
+    const roomMatches = room.name.toLowerCase().includes(q);
+    room.bundles.forEach((bundle, bi) => {
+      const bundleMatches = bundle.name.toLowerCase().includes(q);
+      const matchingItems = bundle.items.filter(item => item.name.toLowerCase().includes(q));
+
+      // Include group if room name, bundle name, or any item matches
+      if (roomMatches || bundleMatches || matchingItems.length > 0) {
+        // If room or bundle name matches, show all items; else only matching items
+        const itemsToShow = (roomMatches || bundleMatches) ? bundle.items.map((item, ii) => ({ item, ii }))
+          : matchingItems.map(item => ({ item, ii: bundle.items.indexOf(item) }));
+
+        groups.push({ room, bundle, bi, items: itemsToShow });
+      }
+    });
+  });
+
+  if (!groups.length) {
+    searchResults.innerHTML = `<div class="no-results">No items found for "<em style="color:var(--gold)">${query}</em>"</div>`;
+    return;
+  }
+
+  // Group by room
+  const byRoom = {};
+  groups.forEach(g => {
+    if (!byRoom[g.room.id]) byRoom[g.room.id] = { room: g.room, bundles: [] };
+    byRoom[g.room.id].bundles.push(g);
+  });
+
+  searchResults.innerHTML = Object.values(byRoom).map(({ room, bundles }) => {
+    const bundlesHtml = bundles.map(({ bundle, bi, items }) => {
+      const bp = getBundleProgress(room, bi);
+      if (filterUncollected && bp.complete) return '';
+
+      const RAIN_SKIP_BUNDLES = new Set(["Lake Fish Bundle", "Crab Pot Bundle", "Specialty Fish Bundle"]);
+      if (rainFilter && RAIN_SKIP_BUNDLES.has(bundle.name)) return '';
+
+      const filteredItems = items.filter(({ item, ii }) => {
+        if (filterUncollected && isChecked(room.id, bi, ii)) return false;
+        if (!itemMatchesSeason(item.name)) return false;
+        return true;
+      });
+      if (!filteredItems.length) return '';
+      const srBundleRequired = bundle.required || bundle.items.length;
+      const srBundleDoneCount = bundle.items.filter((_, i) => isChecked(room.id, bi, i)).length;
+      const srBundleSatisfied = srBundleDoneCount >= srBundleRequired;
+      const itemsHtml = filteredItems.map(({ item, ii }) => {
+        const checked = isChecked(room.id, bi, ii);
+        const surplus = !checked && srBundleSatisfied;
+        return `<div class="item-row${checked ? ' checked' : surplus ? ' surplus' : ''}" data-room="${room.id}" data-bundle="${bi}" data-item="${ii}">
+          <div class="item-check">${checked ? 'x' : ''}</div>
+          <span class="item-name">${item.name}</span>
+          ${item.note ? `<span class="item-note">${item.note}</span>` : ''}
+        </div>`;
+      }).join('');
+      if (!itemsHtml.trim()) return '';
+
+      return `<div class="search-result-bundle${bp.complete ? ' complete' : ''}">${bundle.name}<span class="bundle-progress" style="margin-left:0.6rem;">${bp.done}/${bp.total}</span></div>
+        ${bundle.reward ? `<div class="bundle-reward-row"><span class="bundle-reward${bp.complete ? ' complete' : ''}">🎁 ${bundle.reward}</span></div>` : ''}
+        <div class="search-result-items">${itemsHtml}</div>`;
+    }).join('');
+
+    const bundlesContent = bundlesHtml;
+    if (!bundlesContent.trim()) return '';
+    const srp = getRoomProgress(room);
+    return `<div class="search-result-group ${room.cssClass}${srp.complete ? ' complete' : ''}">
+      <div class="search-result-room" style="display:flex;align-items:center;gap:0.7rem;">${room.name}<span class="room-count" style="font-size:1.1rem;padding:0.15rem 0.6rem;">${srp.done}/${srp.total}</span></div>
+      <div class="search-result-room-reward room-reward${srp.complete ? ' complete' : ''}">🎁 ${room.reward}</div>
+      ${bundlesContent}
+    </div>`;
+  }).filter(Boolean).join('');
+
+  // Attach click events to search result items
+  searchResults.querySelectorAll('.item-row:not(.surplus)').forEach(row => {
+    row.addEventListener('click', () => {
+      toggle(row.dataset.room, parseInt(row.dataset.bundle), parseInt(row.dataset.item));
+      doSearch(searchInput.value); // re-render search with updated state
+    });
+  });
+}
+
+searchInput.addEventListener('input', () => {
+  showAutocomplete(searchInput.value);
+  doSearch(searchInput.value);
+});
+
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    e.preventDefault();
+    openSearch();
+  }
+});
+
+searchInput.addEventListener('keydown', e => {
+  const items = autocompleteEl.querySelectorAll('.autocomplete-item');
+  const isOpen = autocompleteEl.style.display !== 'none' && items.length > 0;
+
+  if (e.key === 'ArrowDown') {
+    if (!isOpen) return;
+    e.preventDefault();
+    setAutocompleteActive(Math.min(autocompleteIndex + 1, items.length - 1));
+  } else if (e.key === 'ArrowUp') {
+    if (!isOpen) return;
+    e.preventDefault();
+    setAutocompleteActive(Math.max(autocompleteIndex - 1, 0));
+  } else if (e.key === 'Enter') {
+    if (isOpen) {
+      e.preventDefault();
+      const active = items[autocompleteIndex] || items[0];
+      if (active) {
+        searchInput.value = active.dataset.value;
+        searchInput.select();
+        autocompleteEl.style.display = 'none';
+        doSearch(active.dataset.value);
+      }
+    }
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && searchPopup.classList.contains('open')) {
+    e.preventDefault();
+    autocompleteEl.style.display = 'none';
+    searchInput.value = '';
+    doSearch('');
+    closeSearch();
+  }
+});
+
+searchInput.addEventListener('blur', () => {
+  setTimeout(() => { autocompleteEl.style.display = 'none'; }, 150);
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.style.display = 'none';
+  autocompleteEl.style.display = 'none';
+  doSearch('');
+});
+
+const resetModal = document.getElementById('reset-modal');
+const resetConfirmYes = document.getElementById('reset-confirm-yes');
+const resetConfirmNo = document.getElementById('reset-confirm-no');
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  resetModal.style.display = 'flex';
+});
+
+resetConfirmYes.addEventListener('click', () => {
+  resetModal.style.display = 'none';
+  state = {};
+  save();
+  render();
+  if (searchInput.value) doSearch(searchInput.value);
+});
+
+resetConfirmNo.addEventListener('click', () => {
+  resetModal.style.display = 'none';
+});
+
+resetModal.addEventListener('mousedown', e => {
+  if (e.target === resetModal) resetModal.style.display = 'none';
+});
+
+// ── Tooltips ─────────────────────────────────────────────
+const ITEM_INFO = {
+  "Wild Horseradish": { season: "Spring", sources: ["Spring Foraging", "Spring Seeds"] },
+  "Daffodil": { season: "Spring", sources: ["Spring Foraging", "Spring Seeds", "Flower Dance (24th of Spring)"] },
+  "Leek": { season: "Spring", sources: ["Spring Foraging", "Spring Seeds"] },
+  "Dandelion": { season: "Spring", sources: ["Spring Foraging", "Spring Seeds", "Flower Dance (24th of Spring)"] },
+  "Grape": { season: "Summer, Fall", sources: ["Summer Foraging", "Summer Seeds", "Grown as a crop during fall"] },
+  "Spice Berry": { season: "Summer", sources: ["Summer Foraging", "Summer Seeds", "The Farm Cave (fruit bat option)"] },
+  "Sweet Pea": { season: "Summer", sources: ["Summer Foraging", "Summer Seeds"] },
+  "Common Mushroom": { season: "Fall", sources: ["Fall Foraging", "Fall Seeds", "The Farm Cave (mushroom option)"] },
+  "Wild Plum": { season: "Fall", sources: ["Fall Foraging", "Fall Seeds", "The Farm Cave (fruit bat option)"] },
+  "Hazelnut": { season: "Fall", sources: ["Fall Foraging", "Fall Seeds"] },
+  "Blackberry": { season: "Fall", sources: ["Fall Foraging", "Fall Seeds", "The Farm Cave (fruit bat option)"] },
+  "Winter Root": { season: "Winter", sources: ["Winter Soil Tilting", "Digging Up Artifact Spot during Winter", "Winter Seeds", "Blue Slimes (The Mines floor 41-79)"] },
+  "Crystal Fruit": { season: "Winter", sources: ["Winter Foraging", "Winter Seeds", "Dust Sprites (The Mines floor 41-79)"] },
+  "Snow Yam": { season: "Winter", sources: ["Winter Soil Tilting", "Digging Up Artifact Spot during Winter", "Winter Seeds"] },
+  "Crocus": { season: "Winter", sources: ["Winter Foraging", "Winter Seeds"] },
+  "Wood": { season: "All Season", sources: ["Chopping Trees"] },
+  "Stone": { season: "All Season", sources: ["Smashing Stones"] },
+  "Hardwood": { season: "All Season", sources: ["Chopping Large Stumps or Large Logs", "Chopping Mahogany Trees"] },
+  "Coconut": { season: "All Season", sources: ["Foraging in the Desert", "Palm Trees in the Desert and on Ginger Island", "Oasis on Mondays"] },
+  "Cactus Fruit": { season: "All Season", sources: ["Foraging in the Desert", "Oasis on Tuesdays"] },
+  "Cave Carrot": { season: "All Season", sources: ["Foraging in The Mines"] },
+  "Red Mushroom": { season: "All Season", sources: ["Foraging in The Mines (Floor 81-119)", "The Farm Cave (mushroom option)", "Secret Woods during Summer and Fall"] },
+  "Purple Mushroom": { season: "All Season", sources: ["Foraging in The Mines (Floor 81-119)", "The Farm Cave (mushroom option)"] },
+  "Maple Syrup": { season: "All Season", sources: ["Tapped Maple Tree"] },
+  "Oak Resin": { season: "All Season", sources: ["Tapped Oak Tree", "Haunted Skulls"] },
+  "Pine Tar": { season: "All Season", sources: ["Tapped Pine Tree"] },
+  "Morel": { season: "Spring", sources: ["Spring Foraging in the Secret Woods", "The Farm Cave (mushroom option)"] },
+  "Parsnip": { season: "Spring", sources: ["Spring Crops"] },
+  "Green Bean": { season: "Spring", sources: ["Spring Crops"] },
+  "Cauliflower": { season: "Spring", sources: ["Spring Crops"] },
+  "Potato": { season: "Spring", sources: ["Spring Crops"] },
+  "Tomato": { season: "Summer", sources: ["Summer Crops"] },
+  "Hot Pepper": { season: "Summer", sources: ["Summer Crops"] },
+  "Blueberry": { season: "Summer", sources: ["Summer Crops"] },
+  "Melon": { season: "Summer", sources: ["Summer Crops"] },
+  "Corn": { season: "Summer, Fall", sources: ["Summer / Fall Crops"] },
+  "Eggplant": { season: "Fall", sources: ["Fall Crops"] },
+  "Pumpkin": { season: "Fall", sources: ["Fall Crops"] },
+  "Yam": { season: "Fall", sources: ["Fall Crops", "Duggies (The Mines floor 2-29)"] },
+  "Large Milk": { season: "All Season", sources: ["Cows"] },
+  "Large Brown Egg": { season: "All Season", sources: ["Brown Chickens"] },
+  "Large White Egg": { season: "All Season", sources: ["White Chickens"] },
+  "Wool": { season: "All Season", sources: ["Sheep", "Rabbits"] },
+  "Duck Egg": { season: "All Season", sources: ["Ducks"] },
+  "Truffle Oil": { season: "All Season", sources: ["Made from Truffles using an Oil Maker (Pigs spawn truffles except in winter)"] },
+  "Cloth": { season: "All Season", sources: ["Made from the Loom using Wool"] },
+  "Goat Cheese": { season: "All Season", sources: ["Made from Goat Milk using a Cheese Press"] },
+  "Cheese": { season: "All Season", sources: ["Made from Milk using a Cheese Press"] },
+  "Honey": { season: "All Season", sources: ["Bee House"] },
+  "Jelly": { season: "All Season", sources: ["Made from fruit using a Preserves Jar"] },
+  "Apple": { season: "Fall", sources: ["Apple Trees during Fall", "The Farm Cave (fruit bat option)"] },
+  "Apricot": { season: "Spring", sources: ["Apricot Trees during Spring", "The Farm Cave (fruit bat option)"] },
+  "Orange": { season: "Summer", sources: ["Orange Trees during Summer", "The Farm Cave (fruit bat option)"] },
+  "Peach": { season: "Summer", sources: ["Peach Trees during Summer", "The Farm Cave (fruit bat option)"] },
+  "Pomegranate": { season: "Fall", sources: ["Pomegranate Trees during Fall", "The Farm Cave (fruit bat option)"] },
+  "Cherry": { season: "Spring", sources: ["Cherry Trees during Spring", "The Farm Cave (fruit bat option)"] },
+  "Sunfish": { season: "Spring, Summer", sources: ["Location: Rivers", "Time: 6am–7pm", "Season: Spring & Summer", "Weather: Sunny"] },
+  "Catfish": { season: "Spring, Summer, Fall", sources: ["Rivers — Spring & Fall, 6am–12am, Rain", "Secret Woods / Witch's Swamp — Spring, Summer & Fall, 6am–12am, Rain"] },
+  "Shad": { season: "Spring, Summer, Fall", sources: ["Location: Rivers", "Time: 9am–2am", "Season: Spring, Summer & Fall", "Weather: Rain"] },
+  "Tiger Trout": { season: "Fall, Winter", sources: ["Location: Rivers", "Time: 6am–7pm", "Season: Fall & Winter", "Weather: Any"] },
+  "Largemouth Bass": { season: "All Season", sources: ["Location: Mountain Lake", "Time: 6am–7pm", "Season: All", "Weather: Any"] },
+  "Carp": { season: "All Season", sources: ["Mountain Lake — Spring, Summer & Fall, Any time, Any weather", "Secret Woods / Sewers / Mutant Bug Lair — All seasons, Any time, Any weather"] },
+  "Bullhead": { season: "All Season", sources: ["Location: Mountain Lake", "Time: Any", "Season: All", "Weather: Any"] },
+  "Sturgeon": { season: "Summer, Winter", sources: ["Location: Mountain Lake", "Time: 6am–7pm", "Season: Summer & Winter", "Weather: Any"] },
+  "Sardine": { season: "Spring, Fall, Winter", sources: ["Location: The Beach", "Time: 6am–7pm", "Season: Spring, Fall & Winter", "Weather: Any"] },
+  "Tuna": { season: "Summer, Winter", sources: ["Location: The Beach", "Time: 6am–7pm", "Season: Summer & Winter", "Weather: Any"] },
+  "Red Snapper": { season: "Summer, Fall", sources: ["Location: The Beach", "Time: 6am–7pm", "Season: Summer & Fall", "Weather: Rain"] },
+  "Tilapia": { season: "Summer, Fall", sources: ["Location: The Beach", "Time: 6am–2pm", "Season: Summer & Fall", "Weather: Any"] },
+  "Walleye": { season: "Fall", sources: ["Location: Rivers", "Time: 12pm–2am", "Season: Fall", "Weather: Rain"] },
+  "Bream": { season: "All Season", sources: ["Location: Rivers", "Time: 6pm–2am", "Season: All", "Weather: Any"] },
+  "Eel": { season: "Spring, Fall", sources: ["Location: The Beach", "Time: 4pm–2am", "Season: Spring & Fall", "Weather: Rain"] },
+  "Lobster": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)"] },
+  "Crayfish": { season: "All Season", sources: ["Caught in Crab Pots (freshwater)"] },
+  "Crab": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)", "Rock Crabs or Lava Crabs in The Mines"] },
+  "Cockle": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)", "Beach Foraging"] },
+  "Mussel": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)", "Beach Foraging"] },
+  "Shrimp": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)"] },
+  "Snail": { season: "All Season", sources: ["Caught in Crab Pots (freshwater)"] },
+  "Periwinkle": { season: "All Season", sources: ["Caught in Crab Pots (freshwater)"] },
+  "Oyster": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)", "Beach Foraging"] },
+  "Clam": { season: "All Season", sources: ["Caught in Crab Pots (Ocean)", "Beach Foraging"] },
+  "Pufferfish": { season: "Summer", sources: ["Location: The Beach", "Time: 12pm–4pm", "Season: Summer", "Weather: Sunny"] },
+  "Ghostfish": { season: "All Season", sources: ["Location: Floor 20 & 60 of The Mines", "Time: Any", "Season: All", "Weather: Any"] },
+  "Sandfish": { season: "All Season", sources: ["Location: The Desert", "Time: 6am–8pm", "Season: All", "Weather: Any"] },
+  "Woodskip": { season: "All Season", sources: ["Location: Secret Woods", "Time: Any", "Season: All", "Weather: Any"] },
+  "Copper Bar": { season: "All Season", sources: ["Smelting Copper Ore in the Furnace"] },
+  "Iron Bar": { season: "All Season", sources: ["Smelting Iron Ore in the Furnace"] },
+  "Gold Bar": { season: "All Season", sources: ["Smelting Gold Ore in the Furnace"] },
+  "Quartz": { season: "All Season", sources: ["Foraging on all floors of The Mines"] },
+  "Earth Crystal": { season: "All Season", sources: ["Foraging on floors 1–39 of The Mines", "Geodes / Omni Geodes", "Duggies (The Mines floor 2-29)"] },
+  "Frozen Tear": { season: "All Season", sources: ["Foraging on floors 41–79 of The Mines", "Frozen Geodes / Omni Geodes", "Dust Sprites (The Mines floor 41-79)"] },
+  "Fire Quartz": { season: "All Season", sources: ["Foraging on floors 81–119 of The Mines", "Magma Geodes / Omni Geodes"] },
+  "Slime": { season: "All Season", sources: ["Dropped by Slimes"] },
+  "Bat Wing": { season: "All Season", sources: ["Dropped by Bats in The Mines (floor 31+)"] },
+  "Solar Essence": { season: "All Season", sources: ["Ghosts (The Mines floor 51-79)", "Metal Heads (The Mines floor 80-119)", "Krobus"] },
+  "Void Essence": { season: "All Season", sources: ["Shadow Brutes (The Mines floor 81-119)", "Shadow Shaman (The Mines floor 81-119)", "Krobus"] },
+  "Fiddlehead Fern": { season: "Summer", sources: ["Summer Foraging in the Secret Woods"] },
+  "Poppy": { season: "Summer", sources: ["Summer Crops"] },
+  "Maki Roll": { season: "All Season", sources: ["Cooking (recipe: The Queen of Sauce / The Saloon)"] },
+  "Fried Egg": { season: "All Season", sources: ["Cooking"] },
+  "Sea Urchin": { season: "All Season", sources: ["Beach Foraging (right side, requires fixing bridge with 300 wood)"] },
+  "Sunflower": { season: "Summer, Fall", sources: ["Summer / Fall Crops"] },
+  "Duck Feather": { season: "All Season", sources: ["Ducks"] },
+  "Aquamarine": { season: "All Season", sources: ["Aquamarine Nodes (The Mines floor 40+)", "Gem Nodes (The Mines floor 40+)"] },
+  "Red Cabbage": { season: "Summer", sources: ["Summer Crops (Pierre's General Store, Year 2+)", "Traveling Cart"] },
+  "Nautilus Shell": { season: "Winter", sources: ["Winter Foraging"] },
+  "Chub": { season: "All Season", sources: ["Location: Mountain Lake / Cindersap Forest River", "Time: Any", "Season: All", "Weather: Any"] },
+  "Frozen Geode": { season: "All Season", sources: ["The Mines floors 41–79"] },
+  "Wheat": { season: "Summer, Fall", sources: ["Summer / Fall Crops"] },
+  "Hay": { season: "All Season", sources: ["Purchase at Marnie's Ranch", "Harvest from Grass (requires Silo)"] },
+  "Wine": { season: "All Season", sources: ["Made from fruit using a Keg"] },
+  "Rabbit's Foot": { season: "All Season", sources: ["Rabbits", "Serpent"] }
+};
+
+const tooltip       = document.getElementById('item-tooltip');
+const tooltipName   = document.getElementById('tooltip-name');
+const tooltipSeason = document.getElementById('tooltip-season');
+const tooltipSources = document.getElementById('tooltip-sources');
+
+document.addEventListener('mouseover', e => {
+  const row = e.target.closest('.item-row');
+  if (!row) return;
+  const nameEl = row.querySelector('.item-name');
+  if (!nameEl) return;
+  // Strip quantity suffixes like "×99", "×10", "×5" and "(gold quality)" before lookup
+  const name = nameEl.textContent.trim().replace(/\s*\(gold quality\)/i, '').replace(/\s*×\d+$/, '').trim();
+  const info = ITEM_INFO[name];
+  if (!info) return;
+  tooltipName.textContent = name;
+  tooltipSources.innerHTML = info.sources.map(s => `<li>${s}</li>`).join('');
+  tooltip.classList.add('visible');
+});
+
+document.addEventListener('mousemove', e => {
+  if (!tooltip.classList.contains('visible')) return;
+  const x = e.clientX + 14;
+  const y = e.clientY + 14;
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  tooltip.style.left = (x + tw > window.innerWidth  ? x - tw - 28 : x) + 'px';
+  tooltip.style.top  = (y + th > window.innerHeight ? y - th - 28 : y) + 'px';
+});
+
+document.addEventListener('mouseout', e => {
+  const row = e.target.closest('.item-row');
+  if (!row) return;
+  if (!row.contains(e.relatedTarget)) tooltip.classList.remove('visible');
+});
+
+document.querySelectorAll('.season-btn:not(.search-toggle-btn)').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const s = btn.dataset.season;
+    const wrap = document.querySelector('.season-filter-wrap');
+    if (s === 'rain') {
+      rainFilter = !rainFilter;
+      btn.classList.toggle('active', rainFilter);
+    } else if (s === 'uncollected') {
+      filterUncollected = !filterUncollected;
+      btn.classList.toggle('active', filterUncollected);
+    } else {
+      if (seasonFilter === s) {
+        seasonFilter = null;
+        btn.classList.remove('active');
+      } else {
+        seasonFilter = s;
+        document.querySelectorAll('.season-btn:not([data-season="rain"]):not([data-season="uncollected"])').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    }
+    const anyActive = seasonFilter !== null || rainFilter || filterUncollected;
+    wrap.classList.toggle('has-active', anyActive);
+    render();
+    if (searchInput.value) doSearch(searchInput.value);
+  });
+});
+
+
+
+// Reset button custom tooltip
+const resetTooltip = document.getElementById('reset-tooltip');
+const resetBtn = document.getElementById('reset-btn');
+resetBtn.addEventListener('mouseenter', () => resetTooltip.classList.add('visible'));
+resetBtn.addEventListener('mousemove', e => {
+  const x = e.clientX + 14;
+  const y = e.clientY + 14;
+  const tw = resetTooltip.offsetWidth;
+  const th = resetTooltip.offsetHeight;
+  resetTooltip.style.left = (x + tw > window.innerWidth ? x - tw - 28 : x) + 'px';
+  resetTooltip.style.top  = (y + th > window.innerHeight ? y - th - 28 : y) + 'px';
+});
+resetBtn.addEventListener('mouseleave', () => resetTooltip.classList.remove('visible'));
+
+render();
+
+</script>
+
+
+<!-- Retro feedback chat bubble -->
+<div id="chat-bubble" style="
+  position:fixed;bottom:1rem;right:1rem;z-index:900;
+  width:2.8rem;height:2.8rem;
+  background:#807267;
+  border-top:3px solid rgba(255,255,255,0.55);
+  border-left:3px solid rgba(255,255,255,0.45);
+  border-right:3px solid rgba(0,0,0,0.4);
+  border-bottom:3px solid rgba(0,0,0,0.45);
+  box-shadow:3px 3px 0 rgba(0,0,0,0.3);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.1s;
+" onmouseenter="this.style.transform='scale(1.08)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="3" width="20" height="14" fill="#fdf5dc" opacity="0.95"/>
+    <polygon points="5,17 2,22 10,17" fill="#fdf5dc" opacity="0.95"/>
+    <rect x="5" y="7" width="14" height="2" fill="#807267"/>
+    <rect x="5" y="11" width="9" height="2" fill="#807267"/>
+  </svg>
+</div>
+
+<div id="chat-window" style="
+  display:none;position:fixed;bottom:6rem;right:1.5rem;z-index:900;
+  width:420px;max-width:calc(100vw - 2rem);
+  background:#fdf5dc;
+  border-top:4px solid rgba(255,255,255,0.7);
+  border-left:4px solid rgba(255,255,255,0.6);
+  border-right:4px solid rgba(0,0,0,0.45);
+  border-bottom:4px solid rgba(0,0,0,0.5);
+  box-shadow:6px 6px 0 rgba(0,0,0,0.3);
+  flex-direction:column;
+  overflow-y:auto;
+  max-height:calc(100vh - 8rem);
+">
+  <!-- Header -->
+  <div style="background:#807267;padding:0.8rem 1.1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid rgba(0,0,0,0.2);">
+    <span style="font-family:'Silkscreen',monospace;font-size:1rem;color:#fdf5dc;letter-spacing:0.04em;">QUESTIONS &amp; SUGGESTIONS</span>
+    <button id="chat-close" style="background:none;border:none;cursor:pointer;padding:0;line-height:1;display:flex;align-items:center;justify-content:center;font-family:'Silkscreen',monospace;font-size:1rem;font-weight:700;color:#fdf5dc;opacity:0.85;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.85'">x</button>
+  </div>
+
+  <!-- Form states -->
+  <div id="chat-form-wrap" style="padding:1.5rem 1.5rem 1.2rem;">
+    <p style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;line-height:1.8;margin:0 0 1.2rem;">HAVE A QUESTION OR SUGGESTION? SEND A MESSAGE TO THE DEVELOPER.</p>
+
+    <form id="chat-form">
+      <!-- Step 1: Question or Suggestion -->
+      <div style="margin-bottom:1.1rem;">
+        <label style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.6rem;letter-spacing:0.03em;">I HAVE A... *</label>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <label id="type-question-label" style="display:flex;align-items:center;gap:0.5rem;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;cursor:pointer;">
+            <input type="radio" name="entry.157072306" value="QUESTION" id="type-question" style="accent-color:#6b8a50;cursor:pointer;width:16px;height:16px;">
+            QUESTION
+          </label>
+          <label id="type-suggestion-label" style="display:flex;align-items:center;gap:0.5rem;font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;cursor:pointer;">
+            <input type="radio" name="entry.157072306" value="SUGGESTION" id="type-suggestion" style="accent-color:#6b8a50;cursor:pointer;width:16px;height:16px;">
+            SUGGESTION
+          </label>
+        </div>
+      </div>
+      <div style="margin-bottom:1.1rem;">
+        <label style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.5rem;letter-spacing:0.03em;">MESSAGE *</label>
+        <textarea name="entry.1443214227" rows="6" placeholder="TYPE HERE..." style="
+          width:100%;box-sizing:border-box;resize:vertical;
+          font-family:'Silkscreen',monospace;font-size:0.85rem;color:#2a1a08;
+          background:#fdf0cc;
+          border-top:2px solid rgba(0,0,0,0.3);
+          border-left:2px solid rgba(0,0,0,0.25);
+          border-right:2px solid rgba(255,255,255,0.6);
+          border-bottom:2px solid rgba(255,255,255,0.55);
+          padding:0.55rem 0.65rem;outline:none;
+        "></textarea>
+      </div>
+      <div style="margin-bottom:1.3rem;">
+        <label id="email-label" style="font-family:'Silkscreen',monospace;font-size:0.85rem;color:#807267;display:block;margin-bottom:0.5rem;letter-spacing:0.03em;">EMAIL ADDRESS (OPTIONAL)</label>
+        <input type="text" id="chat-email" name="entry.1743396539" placeholder="YOU@EXAMPLE.COM" autocomplete="email" inputmode="email" style="
+          width:100%;box-sizing:border-box;
+          font-family:'Silkscreen',monospace;font-size:0.85rem;color:#2a1a08;
+          background:#fdf0cc;
+          border-top:2px solid rgba(0,0,0,0.3);
+          border-left:2px solid rgba(0,0,0,0.25);
+          border-right:2px solid rgba(255,255,255,0.6);
+          border-bottom:2px solid rgba(255,255,255,0.55);
+          padding:0.55rem 0.65rem;outline:none;
+        "/>
+        <div id="email-error" style="display:none;font-family:'Silkscreen',monospace;font-size:0.75rem;color:#b84010;margin-top:0.35rem;letter-spacing:0.02em;">PLEASE ENTER A VALID EMAIL ADDRESS.</div>
+      </div>
+      <button type="submit" id="chat-submit-btn" style="
+        font-family:'Silkscreen',monospace;font-size:0.95rem;
+        width:100%;padding:0.65rem;
+        background:#807267;color:#fdf5dc;
+        border:none;
+        border-top:3px solid rgba(255,255,255,0.5);
+        border-left:3px solid rgba(255,255,255,0.4);
+        border-right:3px solid rgba(0,0,0,0.4);
+        border-bottom:3px solid rgba(0,0,0,0.45);
+        box-shadow:2px 2px 0 rgba(0,0,0,0.25);
+        cursor:pointer;letter-spacing:0.04em;
+      ">SUBMIT</button>
+      <div id="chat-sent" style="display:none;margin-top:1rem;margin-bottom:0rem;text-align:center;">
+        <div style="font-family:'Silkscreen',monospace;font-size:0.82rem;color:#6b8a50;line-height:2;">YOUR MESSAGE HAS BEEN SENT.</div>
+        <div style="font-family:'Silkscreen',monospace;font-size:0.82rem;color:#807267;line-height:2;margin-top:0.2rem;">THANK YOU FOR YOUR<br>QUESTIONS &amp; SUGGESTIONS!</div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Hidden iframe for Google Form submission -->
+<iframe name="hidden-gform" style="display:none;" aria-hidden="true"></iframe>
+
+<script>
+(function() {
+  const bubble   = document.getElementById('chat-bubble');
+  const win      = document.getElementById('chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const form     = document.getElementById('chat-form');
+  const thanks   = document.getElementById('chat-thanks');
+  const formWrap = document.getElementById('chat-form-wrap');
+  let isOpen = false;
+
+  function toggle() {
+    isOpen = !isOpen;
+    win.style.display = isOpen ? 'flex' : 'none';
+    bubble.style.background = isOpen ? '#6b5c50' : '#807267';
+  }
+
+  bubble.addEventListener('click', toggle);
+  closeBtn.addEventListener('click', () => { if (isOpen) toggle(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen) toggle();
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (isOpen && !win.contains(e.target) && !bubble.contains(e.target)) toggle();
+  });
+
+  const submitBtn = document.getElementById('chat-submit-btn');
+  submitBtn.addEventListener('mousedown', () => {
+    submitBtn.style.transform = 'translateY(2px)';
+    submitBtn.style.boxShadow = 'none';
+    submitBtn.style.borderTop = '3px solid rgba(0,0,0,0.3)';
+    submitBtn.style.borderBottom = '3px solid rgba(255,255,255,0.4)';
+  });
+  ['mouseup','mouseleave'].forEach(ev => submitBtn.addEventListener(ev, () => {
+    submitBtn.style.transform = '';
+    submitBtn.style.boxShadow = '2px 2px 0 rgba(0,0,0,0.25)';
+    submitBtn.style.borderTop = '3px solid rgba(255,255,255,0.5)';
+    submitBtn.style.borderBottom = '3px solid rgba(0,0,0,0.45)';
+  }));
+
+
+  // Radio: Question / Suggestion — toggle email required
+  const typeQuestion   = document.getElementById('type-question');
+  const typeSuggestion = document.getElementById('type-suggestion');
+  const emailInput     = document.getElementById('chat-email');
+  const emailLabel     = document.getElementById('email-label');
+  const qLabel         = document.getElementById('type-question-label');
+  const sLabel         = document.getElementById('type-suggestion-label');
+
+  function updateEmailRequirement() {
+    const isQuestion = typeQuestion.checked;
+    emailInput.required = isQuestion;
+    emailLabel.textContent = isQuestion ? 'EMAIL ADDRESS (REQUIRED) *' : 'EMAIL ADDRESS (OPTIONAL)';
+  }
+
+  typeQuestion.addEventListener('change', updateEmailRequirement);
+  typeSuggestion.addEventListener('change', updateEmailRequirement);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const textarea = form.querySelector('textarea');
+    const msg = textarea.value.trim();
+    const selectedType = form.querySelector('input[name="entry.157072306"]:checked');
+    const emailError = document.getElementById('email-error');
+    const emailVal = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    emailError.style.display = 'none';
+
+    if (!selectedType) return;
+    if (!msg) return;
+
+    // Email required for Question, validate format if provided for either
+    if (typeQuestion.checked && !emailVal) {
+      emailInput.focus();
+      emailError.textContent = 'EMAIL ADDRESS IS REQUIRED FOR QUESTIONS.';
+      emailError.style.display = 'block';
+      return;
+    }
+    if (emailVal && !emailRegex.test(emailVal)) {
+      emailInput.focus();
+      emailError.textContent = 'PLEASE ENTER A VALID EMAIL ADDRESS.';
+      emailError.style.display = 'block';
+      return;
+    }
+
+    // Build a temporary form targeting the hidden iframe (bypasses CORS block)
+    const gform = document.createElement('form');
+    gform.method = 'POST';
+    gform.action = 'https://docs.google.com/forms/d/e/1FAIpQLSeOubUGcju9HrWwhQsRgKE_Etl862nMGtTLrnj549j_iiN03Q/formResponse';
+    gform.target = 'hidden-gform';
+    gform.style.display = 'none';
+
+    function addField(name, value) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      gform.appendChild(input);
+    }
+
+    addField('entry.157072306', selectedType.value);
+    if (selectedType.value === 'QUESTION') {
+      addField('entry.1443214227', msg);
+      if (emailVal) addField('entry.663547975', emailVal);
+      addField('pageHistory', '0,1');
+    } else {
+      addField('entry.1227616264', msg);
+      if (emailVal) addField('entry.1743396539', emailVal);
+      addField('pageHistory', '0,2');
+    }
+    addField('fbzx', '0');
+
+    document.body.appendChild(gform);
+    gform.submit();
+    setTimeout(() => { if (document.body.contains(gform)) document.body.removeChild(gform); }, 3000);
+
+    const sent = document.getElementById('chat-sent');
+    setTimeout(() => {
+      form.reset();
+      emailError.style.display = 'none';
+      emailInput.required = false;
+      emailLabel.textContent = 'EMAIL ADDRESS (OPTIONAL)';
+      sent.style.display = 'block';
+      setTimeout(() => { sent.style.display = 'none'; }, 10000);
+    }, 500);
+  });
+})();
+</script>
+
+</body>
+<script>
+(function(){
+  var pDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+  var saved = localStorage.getItem('sdv-theme');
+
+  var wrap = document.createElement('div');
+  wrap.setAttribute('style','position:fixed;bottom:calc(1rem + 2.8rem + 0.5rem);right:1rem;z-index:2147483647;width:2.8rem;height:2.8rem;pointer-events:none;');
+
+  var btn = document.createElement('button');
+  btn.id = 'dark-mode-btn';
+  var BASE = 'position:absolute;inset:0;width:100%;height:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;border-radius:0;border-top:3px solid rgba(255,255,255,0.55);border-left:3px solid rgba(255,255,255,0.45);border-right:3px solid rgba(0,0,0,0.35);border-bottom:3px solid rgba(0,0,0,0.45);box-shadow:2px 2px 0 rgba(0,0,0,0.25);pointer-events:auto;outline:none;';
+  btn.setAttribute('style', BASE + 'background:#e8d8b8;font-size:1.6rem;');
+
+  btn.onmouseenter = function(){ btn.style.filter='brightness(1.1)'; btn.style.transform='translateY(-1px)'; };
+  btn.onmouseleave = function(){ btn.style.filter=''; btn.style.transform=''; };
+  btn.onmousedown  = function(){ btn.style.transform='translateY(1px)'; btn.style.boxShadow='none'; };
+  btn.onmouseup    = function(){ btn.style.transform=''; btn.style.boxShadow='2px 2px 0 rgba(0,0,0,0.25)'; };
+
+  var dmTooltip, dmTooltipText;
+
+  function set(dark){
+    document.body.classList.toggle('dark-mode', dark);
+    var moonSVG = '<svg width="40" height="40" viewBox="0 0 28 28" style="margin-top:2px;margin-left:6px;" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 14A7 7 0 1 1 14 7a5 5 0 1 0 5 7Z" stroke="#fdf5dc" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>';
+    var sunSVG  = '<svg width="32" height="32" viewBox="0 0 28 28" style="margin-top:-2px;margin-left:-2px;" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="5" stroke="#3a3020" stroke-width="1.8" fill="none"/><line x1="14" y1="4" x2="14" y2="6.5" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="14" y1="21.5" x2="14" y2="24" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="4" y1="14" x2="6.5" y2="14" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="21.5" y1="14" x2="24" y2="14" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="7.5" y1="7.5" x2="9.3" y2="9.3" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="18.7" y1="18.7" x2="20.5" y2="20.5" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="20.5" y1="7.5" x2="18.7" y2="9.3" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/><line x1="9.3" y1="18.7" x2="7.5" y2="20.5" stroke="#3a3020" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    btn.innerHTML = dark ? sunSVG : moonSVG;
+    btn.style.fontSize   = '1rem';
+    btn.style.background = dark ? '#e8d8b8' : '#3a3020';
+    btn.title = '';
+    if (dmTooltipText) dmTooltipText.innerHTML = dark ? 'Switch to<br>Light Mode' : 'Switch to<br>Dark Mode';
+    localStorage.setItem('sdv-theme', dark ? 'dark' : 'light');
+  }
+
+  btn.onclick = function(){ set(!document.body.classList.contains('dark-mode')); };
+
+  btn.addEventListener('mouseenter', function(){
+    if(!dmTooltip) return;
+    var r = wrap.getBoundingClientRect();
+    dmTooltip.style.top  = (r.top + r.height / 2 - dmTooltip.offsetHeight / 2) + 'px';
+    dmTooltip.style.left = (r.left - dmTooltip.offsetWidth - 10) + 'px';
+    dmTooltip.classList.add('visible');
+  });
+  btn.addEventListener('mouseleave', function(){ if(dmTooltip) dmTooltip.classList.remove('visible'); });
+  wrap.appendChild(btn);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    dmTooltip = document.getElementById('darkmode-tooltip');
+    dmTooltipText = document.getElementById('darkmode-tooltip-text');
+    document.documentElement.appendChild(wrap);
+    set(saved === 'dark');
+  });
+})();
+</script>
+</html>
